@@ -15,8 +15,8 @@
                 <min>-1.0</min>
                 <max>1.0</max>
             </command_interface>
-            <state_interface name="position" />
-            <state_interface name="velocity" />
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
         </joint>
 
         <joint name="base_link_to_left_wheel">
@@ -24,8 +24,8 @@
                 <min>-1.0</min>
                 <max>1.0</max>
             </command_interface>
-            <state_interface name="position" />
-            <state_interface name="velocity" />
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
         </joint>
 
     </ros2_control>

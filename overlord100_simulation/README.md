@@ -1,6 +1,5 @@
 ### how to run
 
-0. Now everything can be launched just by `ros2 launch overlord100_simulation simulation.launch.py`. So if you need to launch sim, running above is enough.
 1. `ros2 launch overlord100_simulation gazebo.launch.py`
   1.1 or this also works: "ros2 launch overlord100_simulation gazebo.launch.py world_name:="clear_world"
 2.  `ros2 launch overlord100_controller controller.launch.py `

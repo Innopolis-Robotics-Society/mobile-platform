@@ -25,10 +25,10 @@ def generate_launch_description():
     overlord100_description = get_package_share_directory("overlord100_simulation")
     
     use_sim_time = DeclareLaunchArgument(
-        name="use_sim_time",
-        default_value="true",
-        description="Use simulation clock if true"
-    )
+    name="use_sim_time",
+    default_value="true",
+    description="Use simulation clock if true"
+)
 
     model_arg = DeclareLaunchArgument(name="model", default_value=os.path.join(
                                         overlord100_description, "description", "overlord100.urdf.xacro"

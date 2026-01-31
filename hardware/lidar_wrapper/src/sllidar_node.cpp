@@ -3,10 +3,10 @@
 #include <unistd.h>
 
 #include <chrono>
+#include <diagnostic_msgs/msg/diagnostic_status.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/laser_scan.hpp>
 #include <std_srvs/srv/empty.hpp>
-#include <diagnostic_msgs/msg/diagnostic_status.hpp>
 
 #include "math.h"
 // #include "overlord100_msgs/msg/health_status_message.hpp"
@@ -38,9 +38,8 @@ class SLLidarNodeStable : public rclcpp::Node {
   SLLidarNodeStable() : Node("sllidar_node") {
     scan_pub = this->create_publisher<sensor_msgs::msg::LaserScan>(
         "scan", rclcpp::QoS(rclcpp::KeepLast(10)));
-    status_pub =
-        this->create_publisher<diagnostic_msgs::msg::DiagnosticStatus>(
-            "status", rclcpp::QoS(rclcpp::KeepLast(10)));
+    status_pub = this->create_publisher<diagnostic_msgs::msg::DiagnosticStatus>(
+        "status", rclcpp::QoS(rclcpp::KeepLast(10)));
     status_update_timer = this->create_wall_timer(
         1s, std::bind(&SLLidarNodeStable::time_cb, this));
 
@@ -93,20 +92,18 @@ class SLLidarNodeStable : public rclcpp::Node {
 
   void time_cb() { need_status_update = true; }
 
+  void delete_drv(std::string reason = "") {
+    delete drv;
+    drv = NULL;
+    RCLCPP_INFO(this->get_logger(), "! drv deleted");
+  }
+
   bool getSLLIDARDeviceInfo(ILidarDriver* drv) {
     sl_result op_result;
     sl_lidar_response_device_info_t devinfo;
 
     op_result = drv->getDeviceInfo(devinfo);
     if (SL_IS_FAIL(op_result)) {
-      /*if (op_result == SL_RESULT_OPERATION_TIMEOUT) {
-        RCLCPP_ERROR(
-            this->get_logger(),
-            "Error, operation time out. SL_RESULT_OPERATION_TIMEOUT! ");
-      } else {
-        RCLCPP_ERROR(this->get_logger(), "Error, unexpected error, code: %x",
-                     op_result);
-      }*/
       return false;
     }
 
@@ -154,6 +151,7 @@ class SLLidarNodeStable : public rclcpp::Node {
                    "Error, cannot retrieve SLLidar health code: %x", op_result);
       return LOST;
     }
+    return CONNECTED;
   }
 
   bool stop_motor(const std::shared_ptr<std_srvs::srv::Empty::Request> req,
@@ -284,8 +282,7 @@ class SLLidarNodeStable : public rclcpp::Node {
                      "Error, cannot bind to the specified serial port %s.",
                      serial_port.c_str());
       }
-      delete drv;
-      drv = NULL;
+      delete_drv();
       return false;
     }
     return true;
@@ -450,13 +447,12 @@ class SLLidarNodeStable : public rclcpp::Node {
   }
 
   void publish_status() {
-
     auto msg = std::make_shared<diagnostic_msgs::msg::DiagnosticStatus>();
     msg->hardware_id = hardware_id;
     msg->values = {};
     msg->name = "";
 
-    switch(state) {
+    switch (state) {
       case LOST:
         msg->level = diagnostic_msgs::msg::DiagnosticStatus::STALE;
         msg->message = "Disconnected or lost";
@@ -485,35 +481,50 @@ class SLLidarNodeStable : public rclcpp::Node {
 
   void manage_state() {
     if (!drv) {  // drv does not exist
+      RCLCPP_DEBUG(this->get_logger(), "drv does not exist, creating");
       if (create_instance()) {
         state = CREATED;
+        RCLCPP_DEBUG(this->get_logger(), "created");
       } else {
         state = LOST;
+        RCLCPP_DEBUG(this->get_logger(), "not created");
       }
     }
     if (drv) {  // drv exists / created
+      RCLCPP_DEBUG(this->get_logger(), "drv exists");
       // drv exists, connected
       if (drv->isConnected()) {
+        RCLCPP_DEBUG(this->get_logger(), "drv is connected");
         if (state == CREATED) {
+          RCLCPP_DEBUG(this->get_logger(),
+                       "try getSLLIDARDeviceInfo (CREATED)");
           if (!getSLLIDARDeviceInfo(drv)) {
-            {delete drv; drv = NULL;}
+            RCLCPP_DEBUG(this->get_logger(), "getSLLIDARDeviceInfo failed");
+            delete_drv();
             state = LOST;
           }
         }
-        if (state == CREATED) {
+
+        if ((state == CREATED) || (state == CONNECTED_WARN)) {
+          RCLCPP_DEBUG(this->get_logger(), "try checkSLLIDARHealth");
           state = checkSLLIDARHealth(drv);
-          if (state == LOST) {delete drv; drv = NULL;}
+          if (state == LOST) {
+            RCLCPP_DEBUG(this->get_logger(),
+                         "checkSLLIDARHealth returned lost");
+            delete_drv();
+          }
+
+          RCLCPP_DEBUG(this->get_logger(), "State after checkSLLIDARHealth: %d",
+                       state);
           if ((state == CONNECTED) || (state == CONNECTED_WARN)) {
+            RCLCPP_DEBUG(this->get_logger(), "Config");
             config_and_start();
           }
         }
-        if ((state == CONNECTED) || (state == CONNECTED_WARN) || (state == CONNECTED_ERR)) {
-          state = checkSLLIDARHealth(drv);
-          if (state == LOST) {delete drv; drv = NULL;}
-        }
 
       } else {  // drv exists, but not connected
-        {delete drv; drv = NULL;}
+        RCLCPP_DEBUG(this->get_logger(), "drv is not connected");
+        delete_drv();
         state = LOST;
       }
     }
@@ -534,7 +545,7 @@ class SLLidarNodeStable : public rclcpp::Node {
       if (need_status_update) {
         need_status_update = false;
         manage_state();
-        RCLCPP_INFO(this->get_logger(), "State: %d", state);
+        RCLCPP_DEBUG(this->get_logger(), "State: %d", state);
         publish_status();
       }
 
@@ -542,13 +553,8 @@ class SLLidarNodeStable : public rclcpp::Node {
         if (run_scan()) {
           state = CONNECTED;
         } else {
-          // state = CONNECTED_WARN;
-          state = LOST;
-          // drv->stop();
-          drv->disconnect();
-          delete drv;
-          drv = NULL;
-          // break;
+          RCLCPP_DEBUG(this->get_logger(), "Scan err");
+          state = CONNECTED_WARN;
         }
       }
 

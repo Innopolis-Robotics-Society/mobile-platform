@@ -1,5 +1,5 @@
 x-common: &common-setup
-  image: domrachev003/overlord100:0.0.2
+  image: domrachev003/overlord100:hw-v2
   network_mode: host
   privileged: true
   volumes: 
