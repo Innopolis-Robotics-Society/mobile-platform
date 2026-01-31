@@ -1,0 +1,4 @@
+overlord100_database_msgs/Point point
+---
+bool success
+string message

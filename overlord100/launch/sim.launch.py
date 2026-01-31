@@ -177,6 +177,6 @@ def generate_launch_description():
             slam,
             rviz_node,
             # Initialize starting pose
-            startPoseInit,
+            # startPoseInit,
         ]
     )
