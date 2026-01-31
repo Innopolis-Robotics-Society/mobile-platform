@@ -11,6 +11,11 @@ find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(overlord100_msgs REQUIRED)
 
+install(
+  DIRECTORY config launch
+  DESTINATION share/${PROJECT_NAME}/
+)
+
 add_executable(diff_drive_controller src/controller.cpp)
 
 ament_target_dependencies(

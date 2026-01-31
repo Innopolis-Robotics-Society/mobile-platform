@@ -1,5 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,46,108,73"/>
-<area shape="rect" id="node2" href="$classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode.html" title="The PointCloudToLaserScanNodelet class to process incoming laserscans into pointclouds." alt="" coords="156,5,371,47"/>
-<area shape="rect" id="node3" href="$classpointcloud__to__laserscan_1_1PointCloudToLaserScanNode.html" title=" " alt="" coords="156,71,371,112"/>
-</map>

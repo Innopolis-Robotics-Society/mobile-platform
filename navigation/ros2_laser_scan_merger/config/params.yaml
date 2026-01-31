@@ -23,7 +23,7 @@
     laser2YOff: -0.43
     laser2ZOff: 0.0
     pointCloudTopic: cloud_in
-    pointCloutFrameId: chassis # lidar_virtual
+    pointCloutFrameId: base_link # lidar_virtual
     scanTopic1: /laser_scan_front
     scanTopic2: /laser_scan_back
     show1: true
@@ -43,6 +43,6 @@
     range_max: 15.0
     range_min: 0.7
     scan_time: 0.0
-    target_frame: chassis # lidar_virtual
+    target_frame: base_link # lidar_virtual
     transform_tolerance: 0.01
     use_inf: true

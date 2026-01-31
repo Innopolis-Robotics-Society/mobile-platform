@@ -1,9 +1,0 @@
-packages:
-  custom_nodes:
-    generators:
-      - doxygen
-      - sphinx
-    output_dir: docs
-    sphinx:
-      builder: html
-      theme: sphinx_rtd_theme

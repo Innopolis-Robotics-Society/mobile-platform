@@ -172,7 +172,6 @@
         <geometry>
           <mesh>
           <scale>1 1 1</scale>
-          
             <uri>model://large_office_model.dae</uri>
           </mesh>
         </geometry>
