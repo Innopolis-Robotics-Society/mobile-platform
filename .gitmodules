@@ -1,0 +1,6 @@
+[submodule "hardware/lidar"]
+	path = hardware/lidar
+	url = https://github.com/Slamtec/sllidar_ros2
+[submodule "hardware/motors/socketcan"]
+	path = hardware/motors/socketcan
+	url = https://github.com/GOFIRST-Robotics/ros2socketcan_bridge
