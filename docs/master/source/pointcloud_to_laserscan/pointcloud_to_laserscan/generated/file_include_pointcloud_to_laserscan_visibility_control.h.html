@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>File visibility_control.h &mdash; pointcloud_to_laserscan 2.0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Program Listing for File visibility_control.h" href="program_listing_file_include_pointcloud_to_laserscan_visibility_control.h.html" />
+    <link rel="prev" title="Program Listing for File pointcloud_to_laserscan_node.hpp" href="program_listing_file_include_pointcloud_to_laserscan_pointcloud_to_laserscan_node.hpp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> pointcloud_to_laserscan
+          </a>
+              <div class="version">
+                2.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">C++ API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#full-c-api">Full C++ API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="index.html#namespaces">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespace_pointcloud_to_laserscan.html">Namespace pointcloud_to_laserscan</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespace_rclcpp.html">Namespace rclcpp</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#classes-and-structs">Classes and Structs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode.html">Class LaserScanToPointCloudNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classpointcloud__to__laserscan_1_1PointCloudToLaserScanNode.html">Class PointCloudToLaserScanNode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#defines">Defines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8h_1a2ddd5f1f9aa1780431298536a5f4ff12.html">Define POINTCLOUD_TO_LASERSCAN_EXPORT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8h_1ad713b445449574944e8db93761df209c.html">Define POINTCLOUD_TO_LASERSCAN_IMPORT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8h_1ac639ef56c90b504f510853634ba30d51.html">Define POINTCLOUD_TO_LASERSCAN_LOCAL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8h_1a29d4915f17c676278cf084a46d013836.html">Define POINTCLOUD_TO_LASERSCAN_PUBLIC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8h_1a6826f18dc3ac6845af4441c8bf4f460a.html">Define POINTCLOUD_TO_LASERSCAN_PUBLIC_TYPE</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#typedefs">Typedefs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="typedef_laserscan__to__pointcloud__node_8hpp_1abc5e7a177fbaa3b37f3753685b2b751f.html">Typedef pointcloud_to_laserscan::MessageFilter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#directories">Directories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dir_include.html">Directory include</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dir_include_pointcloud_to_laserscan.html">Directory pointcloud_to_laserscan</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#files">Files</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="file_include_pointcloud_to_laserscan_laserscan_to_pointcloud_node.hpp.html">File laserscan_to_pointcloud_node.hpp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_pointcloud_to_laserscan_pointcloud_to_laserscan_node.hpp.html">File pointcloud_to_laserscan_node.hpp</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">File visibility_control.h</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../standards.html">Standard Documents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../standard_docs/CHANGELOG.html">CHANGELOG</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../standard_docs/CHANGELOG.html#changelog-for-package-pointcloud-to-laserscan">Changelog for package pointcloud_to_laserscan</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../standard_docs/CHANGELOG.html#id1">2.0.1 (2021-10-19)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../standard_docs/CHANGELOG.html#id4">2.0.0 (2020-02-10)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../standard_docs/CHANGELOG.html#id6">1.4.1 (2019-08-30)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../standard_docs/CHANGELOG.html#id10">1.4.0 (2017-11-14)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../standard_docs/CHANGELOG.html#id12">1.3.1 (2017-04-26)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../standard_docs/CHANGELOG.html#id14">1.3.0 (2015-06-09)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../standard_docs/CHANGELOG.html#id15">1.2.7 (2015-06-08)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../standard_docs/CHANGELOG.html#id16">1.2.6 (2015-02-04)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../standard_docs/CHANGELOG.html#id17">1.2.5 (2015-01-20)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../standard_docs/CHANGELOG.html#id18">1.2.4 (2015-01-15)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../standard_docs/CHANGELOG.html#id19">1.2.3 (2015-01-10)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../standard_docs/CHANGELOG.html#id20">1.2.2 (2014-10-25)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_docs/LICENSE.html">LICENSE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_docs/PACKAGE.html">PACKAGE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_docs/README.html">README</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../standard_docs/README.html#ros-2-pointcloud-laserscan-converters">ROS 2 pointcloud &lt;-&gt; laserscan converters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../standard_docs/README.html#pointcloud-to-laserscan-pointcloudtolaserscannode">pointcloud_to_laserscan::PointCloudToLaserScanNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../standard_docs/README.html#pointcloud-to-laserscan-laserscantopointcloudnode">pointcloud_to_laserscan::LaserScanToPointCloudNode</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pointcloud_to_laserscan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">C++ API</a> &raquo;</li>
+      <li>File visibility_control.h</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/file_include_pointcloud_to_laserscan_visibility_control.h.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="file-visibility-control-h">
+<span id="file-include-pointcloud-to-laserscan-visibility-control-h"></span><h1>File visibility_control.h<a class="headerlink" href="#file-visibility-control-h" title="Permalink to this headline"></a></h1>
+<p>↰ <a class="reference internal" href="dir_include_pointcloud_to_laserscan.html#dir-include-pointcloud-to-laserscan"><span class="std std-ref">Parent directory</span></a> (<code class="docutils literal notranslate"><span class="pre">include/pointcloud_to_laserscan</span></code>)</p>
+<div class="contents local topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#definition-include-pointcloud-to-laserscan-visibility-control-h" id="id1">Definition (<code class="docutils literal notranslate"><span class="pre">include/pointcloud_to_laserscan/visibility_control.h</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#included-by" id="id2">Included By</a></p></li>
+<li><p><a class="reference internal" href="#defines" id="id3">Defines</a></p></li>
+</ul>
+</div>
+<section id="definition-include-pointcloud-to-laserscan-visibility-control-h">
+<h2>Definition (<code class="docutils literal notranslate"><span class="pre">include/pointcloud_to_laserscan/visibility_control.h</span></code>)<a class="headerlink" href="#definition-include-pointcloud-to-laserscan-visibility-control-h" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="program_listing_file_include_pointcloud_to_laserscan_visibility_control.h.html">Program Listing for File visibility_control.h</a></li>
+</ul>
+</div>
+</section>
+<section id="included-by">
+<h2>Included By<a class="headerlink" href="#included-by" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="file_include_pointcloud_to_laserscan_laserscan_to_pointcloud_node.hpp.html#file-include-pointcloud-to-laserscan-laserscan-to-pointcloud-node-hpp"><span class="std std-ref">File laserscan_to_pointcloud_node.hpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_include_pointcloud_to_laserscan_pointcloud_to_laserscan_node.hpp.html#file-include-pointcloud-to-laserscan-pointcloud-to-laserscan-node-hpp"><span class="std std-ref">File pointcloud_to_laserscan_node.hpp</span></a></p></li>
+</ul>
+</section>
+<section id="defines">
+<h2>Defines<a class="headerlink" href="#defines" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="define_visibility__control_8h_1a2ddd5f1f9aa1780431298536a5f4ff12.html#exhale-define-visibility-control-8h-1a2ddd5f1f9aa1780431298536a5f4ff12"><span class="std std-ref">Define POINTCLOUD_TO_LASERSCAN_EXPORT</span></a></p></li>
+<li><p><a class="reference internal" href="define_visibility__control_8h_1ad713b445449574944e8db93761df209c.html#exhale-define-visibility-control-8h-1ad713b445449574944e8db93761df209c"><span class="std std-ref">Define POINTCLOUD_TO_LASERSCAN_IMPORT</span></a></p></li>
+<li><p><a class="reference internal" href="define_visibility__control_8h_1ac639ef56c90b504f510853634ba30d51.html#exhale-define-visibility-control-8h-1ac639ef56c90b504f510853634ba30d51"><span class="std std-ref">Define POINTCLOUD_TO_LASERSCAN_LOCAL</span></a></p></li>
+<li><p><a class="reference internal" href="define_visibility__control_8h_1a29d4915f17c676278cf084a46d013836.html#exhale-define-visibility-control-8h-1a29d4915f17c676278cf084a46d013836"><span class="std std-ref">Define POINTCLOUD_TO_LASERSCAN_PUBLIC</span></a></p></li>
+<li><p><a class="reference internal" href="define_visibility__control_8h_1a6826f18dc3ac6845af4441c8bf4f460a.html#exhale-define-visibility-control-8h-1a6826f18dc3ac6845af4441c8bf4f460a"><span class="std std-ref">Define POINTCLOUD_TO_LASERSCAN_PUBLIC_TYPE</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="program_listing_file_include_pointcloud_to_laserscan_pointcloud_to_laserscan_node.hpp.html" class="btn btn-neutral float-left" title="Program Listing for File pointcloud_to_laserscan_node.hpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="program_listing_file_include_pointcloud_to_laserscan_visibility_control.h.html" class="btn btn-neutral float-right" title="Program Listing for File visibility_control.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright The &lt;pointcloud_to_laserscan&gt; Contributors. License: BSD.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

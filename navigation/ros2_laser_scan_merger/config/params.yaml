@@ -1,0 +1,48 @@
+/ros2_laser_scan_merger:
+  ros__parameters:
+    flip1: false
+    flip2: false
+    inverse1: false
+    inverse2: false
+    laser1Alpha: 0.0
+    laser1AngleMax: 180.0
+    laser1AngleMin: -90.0
+    laser1B: 0
+    laser1G: 0
+    laser1R: 255
+    laser1XOff: 0.26
+    laser1YOff: 0.43
+    laser1ZOff: 0.0
+    laser2Alpha: 0.0
+    laser2AngleMax: 0.0
+    laser2AngleMin: -270.0
+    laser2B: 255
+    laser2G: 0
+    laser2R: 0
+    laser2XOff: -0.26
+    laser2YOff: -0.43
+    laser2ZOff: 0.0
+    pointCloudTopic: cloud_in
+    pointCloutFrameId: chassis # lidar_virtual
+    scanTopic1: /laser_scan_front
+    scanTopic2: /laser_scan_back
+    show1: true
+    show2: true
+
+/pointcloud_to_laserscan:
+  ros__parameters:
+    angle_increment: 0.0088
+    # angle_max: 1.5708
+    # angle_min: -1.5708
+    angle_max: 3.14
+    angle_min: -3.14
+    inf_epsilon: 1.0
+    max_height: 1.0
+    min_height: 0.0
+    queue_size: 16
+    range_max: 15.0
+    range_min: 0.7
+    scan_time: 0.0
+    target_frame: chassis # lidar_virtual
+    transform_tolerance: 0.01
+    use_inf: true

@@ -1,0 +1,14 @@
+.. _exhale_define_visibility__control_8h_1ac639ef56c90b504f510853634ba30d51:
+
+Define POINTCLOUD_TO_LASERSCAN_LOCAL
+====================================
+
+- Defined in :ref:`file_include_pointcloud_to_laserscan_visibility_control.h`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: POINTCLOUD_TO_LASERSCAN_LOCAL
+   :project: pointcloud_to_laserscan Doxygen Project

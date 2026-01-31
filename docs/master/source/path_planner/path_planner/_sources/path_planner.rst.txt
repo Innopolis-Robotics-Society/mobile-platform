@@ -1,0 +1,10 @@
+path\_planner package
+=====================
+
+Module contents
+---------------
+
+.. automodule:: path_planner
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,23 @@
+.. GENERATED_CONTENT by rosdoc2.verbs.build.builders.sphinx_builder.
+
+ros2_laser_scan_merger
+======================
+
+A Package to combine several laser scan value
+
+.. toctree::
+   :maxdepth: 2
+
+
+
+
+
+
+   Standard Documents <standards>
+
+.. include:: __readme_include.rst
+
+.. toctree::
+   :hidden:
+
+   genindex

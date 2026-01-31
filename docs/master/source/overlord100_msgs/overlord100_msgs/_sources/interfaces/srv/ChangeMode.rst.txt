@@ -1,0 +1,8 @@
+ChangeMode
+==========
+This is a ROS service definition.
+
+**Source**
+
+.. literalinclude:: ../../../../../../src/overlord100-msgs/overlord100_msgs/srv/ChangeMode.srv
+

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_850527e5db4686b93d8ae68f8314c0f6" kind="dir">
+    <compoundname>include/pointcloud_to_laserscan</compoundname>
+    <innerfile refid="laserscan__to__pointcloud__node_8hpp">laserscan_to_pointcloud_node.hpp</innerfile>
+    <innerfile refid="pointcloud__to__laserscan__node_8hpp">pointcloud_to_laserscan_node.hpp</innerfile>
+    <innerfile refid="visibility__control_8h">visibility_control.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/pointcloud_to_laserscan/"/>
+  </compounddef>
+</doxygen>

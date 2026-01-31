@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode" kind="class" language="C++" prot="public">
+    <compoundname>pointcloud_to_laserscan::LaserScanToPointCloudNode</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">rclcpp::Node</basecompoundref>
+    <includes refid="laserscan__to__pointcloud__node_8hpp" local="no">laserscan_to_pointcloud_node.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a9c4a9bbfe6c3cc125c0c8bc47b4c8711" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; tf2_ros::Buffer &gt;</type>
+        <definition>std::unique_ptr&lt;tf2_ros::Buffer&gt; pointcloud_to_laserscan::LaserScanToPointCloudNode::tf2_</definition>
+        <argsstring></argsstring>
+        <name>tf2_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="80" column="19" bodyfile="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a829ba43f86324fc20d8dead2f42b78fc" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; tf2_ros::TransformListener &gt;</type>
+        <definition>std::unique_ptr&lt;tf2_ros::TransformListener&gt; pointcloud_to_laserscan::LaserScanToPointCloudNode::tf2_listener_</definition>
+        <argsstring></argsstring>
+        <name>tf2_listener_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="81" column="19" bodyfile="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1ab3673cd67d543e41e0f5b2573c18c27c" prot="private" static="no" mutable="no">
+        <type>message_filters::Subscriber&lt; sensor_msgs::msg::LaserScan &gt;</type>
+        <definition>message_filters::Subscriber&lt;sensor_msgs::msg::LaserScan&gt; pointcloud_to_laserscan::LaserScanToPointCloudNode::sub_</definition>
+        <argsstring></argsstring>
+        <name>sub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="82" column="31" bodyfile="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a10ea0e22805aa783b19b2d39525ab8cc" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; rclcpp::Publisher&lt; sensor_msgs::msg::PointCloud2 &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;rclcpp::Publisher&lt;sensor_msgs::msg::PointCloud2&gt; &gt; pointcloud_to_laserscan::LaserScanToPointCloudNode::pub_</definition>
+        <argsstring></argsstring>
+        <name>pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="83" column="19" bodyfile="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a8f47a81e2aeb353e9cac1ba3ca752d4d" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; MessageFilter &gt;</type>
+        <definition>std::unique_ptr&lt;MessageFilter&gt; pointcloud_to_laserscan::LaserScanToPointCloudNode::message_filter_</definition>
+        <argsstring></argsstring>
+        <name>message_filter_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="84" column="19" bodyfile="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a799a1b68684574c57cd09232da5f7527" prot="private" static="no" mutable="no">
+        <type>std::thread</type>
+        <definition>std::thread pointcloud_to_laserscan::LaserScanToPointCloudNode::subscription_listener_thread_</definition>
+        <argsstring></argsstring>
+        <name>subscription_listener_thread_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="85" column="15" bodyfile="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1aada4bf446e179fa7fe3f91f7cd75da6c" prot="private" static="no" mutable="no">
+        <type>std::atomic_bool</type>
+        <definition>std::atomic_bool pointcloud_to_laserscan::LaserScanToPointCloudNode::alive_</definition>
+        <argsstring></argsstring>
+        <name>alive_</name>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="86" column="20" bodyfile="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a20935fe16c96e28f345378806d151087" prot="private" static="no" mutable="no">
+        <type>laser_geometry::LaserProjection</type>
+        <definition>laser_geometry::LaserProjection pointcloud_to_laserscan::LaserScanToPointCloudNode::projector_</definition>
+        <argsstring></argsstring>
+        <name>projector_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="88" column="35" bodyfile="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1afdf386ea8c53ae9aee6ad3ec4c9c766d" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int pointcloud_to_laserscan::LaserScanToPointCloudNode::input_queue_size_</definition>
+        <argsstring></argsstring>
+        <name>input_queue_size_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="91" column="7" bodyfile="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a62276ff0c4c37f112b2b764607188071" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string pointcloud_to_laserscan::LaserScanToPointCloudNode::target_frame_</definition>
+        <argsstring></argsstring>
+        <name>target_frame_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="92" column="15" bodyfile="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1ae2c612e97a0cef052c22530838fd6150" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double pointcloud_to_laserscan::LaserScanToPointCloudNode::tolerance_</definition>
+        <argsstring></argsstring>
+        <name>tolerance_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="93" column="10" bodyfile="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a0ed1730516c419e3a4b842e4c1b152d8" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type>POINTCLOUD_TO_LASERSCAN_PUBLIC</type>
+        <definition>POINTCLOUD_TO_LASERSCAN_PUBLIC pointcloud_to_laserscan::LaserScanToPointCloudNode::LaserScanToPointCloudNode</definition>
+        <argsstring>(const rclcpp::NodeOptions &amp;options)</argsstring>
+        <name>LaserScanToPointCloudNode</name>
+        <param>
+          <type>const rclcpp::NodeOptions &amp;</type>
+          <declname>options</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="71" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a700f3a50f4469f79fdb4ab2798a93fd0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>pointcloud_to_laserscan::LaserScanToPointCloudNode::~LaserScanToPointCloudNode</definition>
+        <argsstring>() override</argsstring>
+        <name>~LaserScanToPointCloudNode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="73" column="3"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a25bd185f2799f8011a88db3a45fe948f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pointcloud_to_laserscan::LaserScanToPointCloudNode::scanCallback</definition>
+        <argsstring>(sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg)</argsstring>
+        <name>scanCallback</name>
+        <param>
+          <type>sensor_msgs::msg::LaserScan::ConstSharedPtr</type>
+          <declname>scan_msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="76" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a441a4ad6e1f86d71417eb5aae3d44111" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pointcloud_to_laserscan::LaserScanToPointCloudNode::subscriptionListenerThreadLoop</definition>
+        <argsstring>()</argsstring>
+        <name>subscriptionListenerThreadLoop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="78" column="8"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The PointCloudToLaserScanNodelet class to process incoming laserscans into pointclouds. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rclcpp::Node</label>
+      </node>
+      <node id="1">
+        <label>pointcloud_to_laserscan::LaserScanToPointCloudNode</label>
+        <link refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rclcpp::Node</label>
+      </node>
+      <node id="1">
+        <label>pointcloud_to_laserscan::LaserScanToPointCloudNode</label>
+        <link refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" line="67" column="1" bodyfile="include/pointcloud_to_laserscan/laserscan_to_pointcloud_node.hpp" bodystart="68" bodyend="94"/>
+    <listofallmembers>
+      <member refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1aada4bf446e179fa7fe3f91f7cd75da6c" prot="private" virt="non-virtual"><scope>pointcloud_to_laserscan::LaserScanToPointCloudNode</scope><name>alive_</name></member>
+      <member refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1afdf386ea8c53ae9aee6ad3ec4c9c766d" prot="private" virt="non-virtual"><scope>pointcloud_to_laserscan::LaserScanToPointCloudNode</scope><name>input_queue_size_</name></member>
+      <member refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a0ed1730516c419e3a4b842e4c1b152d8" prot="public" virt="non-virtual"><scope>pointcloud_to_laserscan::LaserScanToPointCloudNode</scope><name>LaserScanToPointCloudNode</name></member>
+      <member refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a8f47a81e2aeb353e9cac1ba3ca752d4d" prot="private" virt="non-virtual"><scope>pointcloud_to_laserscan::LaserScanToPointCloudNode</scope><name>message_filter_</name></member>
+      <member refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a20935fe16c96e28f345378806d151087" prot="private" virt="non-virtual"><scope>pointcloud_to_laserscan::LaserScanToPointCloudNode</scope><name>projector_</name></member>
+      <member refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a10ea0e22805aa783b19b2d39525ab8cc" prot="private" virt="non-virtual"><scope>pointcloud_to_laserscan::LaserScanToPointCloudNode</scope><name>pub_</name></member>
+      <member refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a25bd185f2799f8011a88db3a45fe948f" prot="private" virt="non-virtual"><scope>pointcloud_to_laserscan::LaserScanToPointCloudNode</scope><name>scanCallback</name></member>
+      <member refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1ab3673cd67d543e41e0f5b2573c18c27c" prot="private" virt="non-virtual"><scope>pointcloud_to_laserscan::LaserScanToPointCloudNode</scope><name>sub_</name></member>
+      <member refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a799a1b68684574c57cd09232da5f7527" prot="private" virt="non-virtual"><scope>pointcloud_to_laserscan::LaserScanToPointCloudNode</scope><name>subscription_listener_thread_</name></member>
+      <member refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a441a4ad6e1f86d71417eb5aae3d44111" prot="private" virt="non-virtual"><scope>pointcloud_to_laserscan::LaserScanToPointCloudNode</scope><name>subscriptionListenerThreadLoop</name></member>
+      <member refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a62276ff0c4c37f112b2b764607188071" prot="private" virt="non-virtual"><scope>pointcloud_to_laserscan::LaserScanToPointCloudNode</scope><name>target_frame_</name></member>
+      <member refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a9c4a9bbfe6c3cc125c0c8bc47b4c8711" prot="private" virt="non-virtual"><scope>pointcloud_to_laserscan::LaserScanToPointCloudNode</scope><name>tf2_</name></member>
+      <member refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a829ba43f86324fc20d8dead2f42b78fc" prot="private" virt="non-virtual"><scope>pointcloud_to_laserscan::LaserScanToPointCloudNode</scope><name>tf2_listener_</name></member>
+      <member refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1ae2c612e97a0cef052c22530838fd6150" prot="private" virt="non-virtual"><scope>pointcloud_to_laserscan::LaserScanToPointCloudNode</scope><name>tolerance_</name></member>
+      <member refid="classpointcloud__to__laserscan_1_1LaserScanToPointCloudNode_1a700f3a50f4469f79fdb4ab2798a93fd0" prot="public" virt="non-virtual"><scope>pointcloud_to_laserscan::LaserScanToPointCloudNode</scope><name>~LaserScanToPointCloudNode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

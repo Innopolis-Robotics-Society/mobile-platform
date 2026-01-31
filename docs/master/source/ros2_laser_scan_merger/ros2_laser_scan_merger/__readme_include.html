@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>README &mdash; ros2_laser_scan_merger 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ros2_laser_scan_merger
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="standards.html">Standard Documents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="standard_docs/PACKAGE.html">PACKAGE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="standard_docs/README.html">README</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_docs/README.html#ros2-laser-scan-merger">ros2_laser_scan_merger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_docs/README.html#prerequisite">Prerequisite</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_docs/README.html#how-to-use">How to use</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_docs/README.html#available-parameters">Available Parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ros2_laser_scan_merger</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>README</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/__readme_include.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="readme">
+<h1>README<a class="headerlink" href="#readme" title="Permalink to this headline"></a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="ros2-laser-scan-merger">
+<h2>ros2_laser_scan_merger<a class="headerlink" href="#ros2-laser-scan-merger" title="Permalink to this headline"></a></h2>
+<p><img alt="laser scan merger configurator" src="https://github.com/mich1342/ros2_laser_scan_merger/blob/main/LidarCallbration.png" />
+A full c++ based ros2 package to merge several laserscan / lidars topics by creating a new virtual laserscan topic. Each source laserscan could be configure via the parameter to determine the heading of each source laserscan and the relative position of each source laserscan to the virtual laserscan.</p>
+<section id="prerequisite">
+<h3>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this headline"></a></h3>
+<ol class="arabic simple">
+<li><p>ROS2 (Tested on Humble)</p></li>
+<li><p>Your laserscans driver (Tested using RPLIDAR S1 and RPLIDAR S1)</p></li>
+<li><p>RVIZ2</p></li>
+<li><p>RQT</p></li>
+<li><p><a class="reference external" href="https://github.com/ros-perception/pointcloud_to_laserscan">Pointcloud to Laserscan</a></p></li>
+</ol>
+</section>
+<section id="how-to-use">
+<h3>How to use<a class="headerlink" href="#how-to-use" title="Permalink to this headline"></a></h3>
+<ol class="arabic simple">
+<li><p>Clone the repo to your ros2 workspace</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/mich1342/ros2_laser_scan_merger.git
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Edit the topic name in the launch file if needed</p></li>
+<li><p>Build and Source</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon build <span class="o">&amp;&amp;</span> <span class="nb">source</span> install/setup.bash
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Launch the package</p></li>
+</ol>
+<ul class="simple">
+<li><p>To launch without visualizer</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2 launch ros2_laser_scan_merger merge_2_scan.launch.py
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>To launch with visualizer (RVIZ2)</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2 launch ros2_laser_scan_merger visualize_merge_2_scan.launch.py
+</pre></div>
+</div>
+<p>Both of the launch file already integrated with the pointclound_to_laserscan package</p>
+<ol class="arabic simple">
+<li><p>Open RQT to set the parameter</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rqt
+</pre></div>
+</div>
+</section>
+<section id="available-parameters">
+<h3>Available Parameters<a class="headerlink" href="#available-parameters" title="Permalink to this headline"></a></h3>
+<p>All parameters are being set in the <code class="docutils literal notranslate"><span class="pre">params.yaml</span></code> file inside the <code class="docutils literal notranslate"><span class="pre">config</span></code> directory.</p>
+<p>All parameters similar for the first and second lidar data. The <code class="docutils literal notranslate"><span class="pre">{x}</span></code> marks means the index pattern for the lidar data. Example: <code class="docutils literal notranslate"><span class="pre">show{x}</span></code> means <code class="docutils literal notranslate"><span class="pre">show1</span></code> and <code class="docutils literal notranslate"><span class="pre">show2</span></code> for 2 lidar configuration.</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter Name</p></th>
+<th class="head"><p>Default Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>scanTopic{x}</p></td>
+<td><p>/lidar_1/scan <br/> /lidar_2/scan</p></td>
+<td><p>laser scan or lidar topic</p></td>
+</tr>
+<tr class="row-odd"><td><p>show{x}</p></td>
+<td><p>true</p></td>
+<td><p>set as <code class="docutils literal notranslate"><span class="pre">true</span></code> to include the first lidar data or <code class="docutils literal notranslate"><span class="pre">false</span></code> to hide the specific lidar data</p></td>
+</tr>
+<tr class="row-even"><td><p>flip{x}</p></td>
+<td><p>false</p></td>
+<td><p>set as <code class="docutils literal notranslate"><span class="pre">true</span></code> for upside down lidar installation</p></td>
+</tr>
+<tr class="row-odd"><td><p>laser{x}AngleMax</p></td>
+<td><p>180</p></td>
+<td><p>maximum angle in degree of the lidar data that are being used for the final merged result, usefull to hide some part of the lidars data. will highly depends on each lidar specification</p></td>
+</tr>
+<tr class="row-even"><td><p>laser{x}AngleMin</p></td>
+<td><p>-180</p></td>
+<td><p>minimum angle in degree of the lidar data that are being used for the final merged result, usefull to hide some part of the lidars data. will highly depends on each lidar specification</p></td>
+</tr>
+<tr class="row-odd"><td><p>inverse{x}</p></td>
+<td><p>false</p></td>
+<td><p>set as <code class="docutils literal notranslate"><span class="pre">true</span></code> to inverse the hidden lidar data based on the <code class="docutils literal notranslate"><span class="pre">laser{x}AngleMax</span></code> and <code class="docutils literal notranslate"><span class="pre">laser{x}AngleMin</span></code> value</p></td>
+</tr>
+<tr class="row-even"><td><p>laser{x}Alpha</p></td>
+<td><p>0</p></td>
+<td><p>angular offset of the lidar data</p></td>
+</tr>
+<tr class="row-odd"><td><p>laser{x}XOff</p></td>
+<td><p>-0.3</p></td>
+<td><p>linar offset of the lidar data in x axis</p></td>
+</tr>
+<tr class="row-even"><td><p>laser{x}YOff</p></td>
+<td><p>-0.475</p></td>
+<td><p>linar offset of the lidar data in y axis</p></td>
+</tr>
+<tr class="row-odd"><td><p>laser{x}ZOff</p></td>
+<td><p>0.176</p></td>
+<td><p>linar offset of the lidar data in z axis</p></td>
+</tr>
+<tr class="row-even"><td><p>laser{x}B</p></td>
+<td><p>0</p></td>
+<td><p>set color to the resulted pointclound2 data (0-255)</p></td>
+</tr>
+<tr class="row-odd"><td><p>laser{x}G</p></td>
+<td><p>0</p></td>
+<td><p>set color to the resulted pointclound2 data (0-255)</p></td>
+</tr>
+<tr class="row-even"><td><p>laser{x}R</p></td>
+<td><p>255</p></td>
+<td><p>set color to the resulted pointclound2 data (0-255)</p></td>
+</tr>
+<tr class="row-odd"><td><p>pointCloudTopic</p></td>
+<td><p>cloud_in</p></td>
+<td><p>pointcloud2 published topic (adjusted to <code class="docutils literal notranslate"><span class="pre">pointcloud_to_laserscan</span></code> package)</p></td>
+</tr>
+<tr class="row-even"><td><p>pointCloutFrameId</p></td>
+<td><p>laser</p></td>
+<td><p>frame id of the pointcloud2 published data</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright The &lt;ros2_laser_scan_merger&gt; Contributors. License: Apache Lisence 2.0.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
