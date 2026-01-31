@@ -1,8 +1,0 @@
-Mode
-====
-This is a ROS message definition.
-
-**Source**
-
-.. literalinclude:: ../../../../../../src/overlord100-msgs/overlord100_msgs/msg/Mode.msg
-

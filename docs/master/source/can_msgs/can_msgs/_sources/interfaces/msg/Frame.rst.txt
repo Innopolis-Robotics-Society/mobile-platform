@@ -1,8 +1,0 @@
-Frame
-=====
-This is a ROS message definition.
-
-**Source**
-
-.. literalinclude:: ../../../../../../src/hardware/motors/can_msgs/msg/Frame.msg
-

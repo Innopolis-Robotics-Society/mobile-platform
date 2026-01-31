@@ -1,3 +1,9 @@
+//
+//   created by: Michael Jonathan (mich1342)
+//   github.com/mich1342
+//   24/2/2022
+//
+
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/laser_scan.hpp>
 

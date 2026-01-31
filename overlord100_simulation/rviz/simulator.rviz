@@ -37,8 +37,8 @@ Visualization Manager:
     - Name: RobotModel
       Class: rviz_default_plugins/RobotModel
       Enabled: true
-      Visual Enabled: false
-      Collision Enabled: true
+      Visual Enabled: true
+      Collision Enabled: false
       Mass Properties:
         Mass: false
         Inertia: false

@@ -1,7 +1,6 @@
 # Use Ubuntu 22.04 as the base image
 FROM ubuntu:22.04
 # Use ROS 2 Humble from Docker Hub as the base image
-FROM ros:humble-ros-base
 # Set non-interactive frontend fodebconf
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -33,14 +32,12 @@ ARG USER_GID=$USER_UID
 # Install additional ROS 2 packages including development tools
 RUN apt-get update && apt-get install -y \
     python3-pip \
-    python3-rosdoc2 \
-    doxygen \
-    python3-sphinx \
     ros-humble-slam-toolbox \
     ros-humble-navigation2 \
     ros-humble-nav2-bringup \
     ros-humble-rosbridge-suite \
     ros-humble-ros2-control \
+    ros-humble-ign-ros2-control \
     ros-humble-ros2-controllers \
     ros-humble-rqt-robot-steering \
     ros-humble-nav2-msgs \
@@ -50,6 +47,21 @@ RUN apt-get update && apt-get install -y \
     ros-humble-rviz2 \
     ros-humble-rqt-tf-tree \
     ros-humble-xacro \
+    ros-humble-ament-cmake \       
+    ros-humble-ament-cmake-auto \
+    ros-humble-ament-lint-auto \
+    ros-humble-launch-testing-ros \
+    ros-humble-ros-gz-sim \
+    ros-humble-ros-gz-bridge \
+    liburdfdom-tools \
+    ros-humble-joint-state-publisher-gui \
+    ros-humble-robot-state-publisher \
+    ros-humble-ros2-controllers-test-nodes \
+    ros-humble-ros2launch \
+    ros-humble-gazebo-ros \
+    ros-humble-rclc \
+    ros-humble-turtlebot3-gazebo \
+    ros-humble-robot-localization \
     ros-dev-tools \
     x11-apps \
     xauth \

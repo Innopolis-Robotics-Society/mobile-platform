@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="overlord100">
+
+    <ros2_control name="RobotSystem" type="system">
+
+        <!-- ros2_control Gazebo -->
+        <hardware>
+            <plugin>ign_ros2_control/IgnitionSystem</plugin>
+        </hardware>
+
+        <!-- ros2_control Common Interfaces -->
+        <joint name="base_link_to_right_wheel">
+            <command_interface name="velocity">
+                <min>-1.0</min>
+                <max>1.0</max>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+
+        <joint name="base_link_to_left_wheel">
+            <command_interface name="velocity">
+                <min>-1.0</min>
+                <max>1.0</max>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+
+    </ros2_control>
+
+</robot>

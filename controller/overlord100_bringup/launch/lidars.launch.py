@@ -11,11 +11,11 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='sllidar_ros2',
-#            namespace='nslf',
+            package='lidar_wrapper',
             executable='sllidar_node',
             name='lidar_front',
             parameters=[{'channel_type': 'serial',
+                         'hardware_id': 'lidar: front/.3',
                          'serial_port': '/dev/usb_2.3', 
                          'serial_baudrate': 460800, 
                          'frame_id': 'lidar_front',
@@ -26,11 +26,11 @@ def generate_launch_description():
             remappings=[("/scan", "/laser_scan_front"), ("/stop_motor", "/laser_front_stop"), ("/start_motor", "/laser_front_start")]
         ),
         Node(
-            package='sllidar_ros2',
-#            namespace='nslb',
+            package='lidar_wrapper',
             executable='sllidar_node',
             name='lidar_back',
             parameters=[{'channel_type': 'serial',
+                         'hardware_id': 'lidar: back/.4',
                          'serial_port': '/dev/usb_2.4', 
                          'serial_baudrate': 460800, 
                          'frame_id': 'lidar_back',
