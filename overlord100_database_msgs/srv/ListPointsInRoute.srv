@@ -1,0 +1,4 @@
+string map_name
+string route_name
+---
+string[] point_names

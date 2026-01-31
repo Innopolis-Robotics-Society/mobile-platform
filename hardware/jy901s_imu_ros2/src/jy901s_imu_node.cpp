@@ -1,7 +1,6 @@
 #include <atomic>
 #include <thread>
 #include <string>
-#include <chrono>
 #include <stdint.h>
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/imu.hpp"
@@ -12,9 +11,7 @@
 #include "wit_c_sdk.hpp"
 #include "serial.hpp"
 #include "REG.hpp"
-#include <diagnostic_msgs/msg/diagnostic_status.hpp>
 
-using namespace std::chrono_literals;
 
 #define ACC_UPDATE 0x01
 #define GYRO_UPDATE 0x02
@@ -26,11 +23,10 @@ using namespace std::chrono_literals;
 static int fd, s_iCurBaud = 38400;
 static volatile char s_cDataUpdate = 0;
 
-// . /opt/ros/humble/setup.bash && . install/setup.bash && ros2 run jy901s_imu_ros2 jy901s_imu_node
-// . /opt/ros/humble/setup.bash && colcon build --packages-select jy901s_imu_ros2 && . install/setup.bash && ros2 run jy901s_imu_ros2 jy901s_imu_node
+//const int c_uiBaud[] = {2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600};
+const int c_uiBaud[] = {38400};
 
-// ros2 run jy901s_imu_ros2 jy901s_imu_node
-
+static void AutoScanSensor(char *dev);
 static void SensorDataUpdata(uint32_t uiReg, uint32_t uiRegNum);
 static void Delayms(uint16_t ucMs);
 
@@ -44,9 +40,7 @@ public:
         this->declare_parameter("port", "/dev/ttyTHS0");
         this->declare_parameter("baudrate", 38400);
         this->declare_parameter("reverse_pitch_roll", false);
-        this->declare_parameter<std::string>("hardware_id", "imu");
 
-        this->get_parameter_or<std::string>("hardware_id", hardware_id, "imu");
         this->port = this->get_parameter("port").as_string();
         this->baudrate = this->get_parameter("baudrate").as_int();
         this->reverse_pitch_roll = this->get_parameter("reverse_pitch_roll").as_bool();
@@ -54,20 +48,27 @@ public:
         imu_pub = this->create_publisher<sensor_msgs::msg::Imu>("imu/data_raw", 1000);
         mag_pub = this->create_publisher<sensor_msgs::msg::MagneticField>("imu/mag", 1000);
         gps_pub = this->create_publisher<sensor_msgs::msg::NavSatFix>("gps/fix", 1000);
-        status_pub = this->create_publisher<diagnostic_msgs::msg::DiagnosticStatus>(
-            "status", rclcpp::QoS(rclcpp::KeepLast(10)));
         //timer = nh.createTimer(ros::Duration(0.005), &ImuPublisher::imuPublishCallback, this); // 200 Hz
+
+        printf("Trying to open %s at %lu\r\n", port.c_str(), baudrate);
+        if ((fd = serial_open(const_cast<char*>(port.c_str()), baudrate) < 0))
+	    {
+	        printf("Error opening serial port ... exiting ....\r\n");
+            //ROS_ERROR("Error opening serial port ... exiting ....");
+            //this->~ImuPublisher();
+            return;
+	    }
+	    else
+	        printf("Opened serial port: %s at baudrate: %d\r\n", port.c_str(), static_cast<int>(baudrate));
+		    //ROS_INFO("Opened serial port: %s at baudrate: %d", port.c_str(), static_cast<int>(baudrate));
 
         WitInit(WIT_PROTOCOL_NORMAL, 0x50);
 	    WitRegisterCallBack(SensorDataUpdata);
 
-        //publish_status();
+        //ROS_INFO("Starting to publish imu data ...");
+	    AutoScanSensor(const_cast<char*>(port.c_str()));
 
         pubThread = std::thread(&ImuPublisher::imuPublish, this);
-        
-        status_update_timer = this->create_wall_timer(
-            1s, std::bind(&ImuPublisher::time_cb, this));
-
     }
 
     ~ImuPublisher() {
@@ -77,92 +78,10 @@ public:
         }
         serial_close(fd);
     }
-    
-    void time_cb() {
-        need_status_update = true;
-    }
-
-    void discoverSensor(char *dev, int baudrate)
-    {
-        int i, iRetry;
-        char cBuff[1];
-
-        if(first_open) {
-            serial_close(fd); // crashes thread if fd is not opened
-            Delayms(500);
-            first_open = false;
-        }
-        if ((fd = serial_open(const_cast<char*>(port.c_str()), baudrate) < 0))
-        {
-            //printf("Error opening serial port\r\n");
-            //ROS_ERROR("Error opening serial port ... exiting ....");
-            //this->~ImuPublisher();
-            fd_opened = false;
-            return;
-        }
-        else
-        {
-            //printf("Opened serial port\r\n");
-            //ROS_INFO("Opened serial port: %s at baudrate: %d", port.c_str(), static_cast<int>(baudrate));
-            fd_opened = true;
-        }
-
-        iRetry = 2;
-        do {
-            s_cDataUpdate = 0;
-            WitReadReg(AX, 3);
-            Delayms(500);
-            while (serial_read_data(fd, reinterpret_cast<unsigned char*>(cBuff), 1)) {
-                WitSerialDataIn(cBuff[0]);
-            }
-            if (s_cDataUpdate != 0) {
-                printf("%d baud find sensor\r\n\r\n", baudrate);
-                sensor_discovered = true;
-                return;
-            }
-            iRetry--;
-        } while (iRetry);
-        //printf("can not find sensor\r\n");
-        sensor_discovered = false;
-    }
-        
-    void publish_status() {
-        auto msg = std::make_shared<diagnostic_msgs::msg::DiagnosticStatus>();
-        msg->hardware_id = hardware_id;
-        msg->values = {};
-        msg->name = "";
-
-        
-        if((!fd_opened) || (!sensor_discovered)) {
-            discoverSensor(const_cast<char*>(port.c_str()), baudrate);
-        }
-
-        if(!fd_opened) {
-            msg->level = diagnostic_msgs::msg::DiagnosticStatus::ERROR;
-            msg->message = "I2C bus file open error";
-        } else {
-            if(sensor_discovered) {
-                msg->level = diagnostic_msgs::msg::DiagnosticStatus::OK;
-                msg->message = "Running";
-            } else {
-                msg->level = diagnostic_msgs::msg::DiagnosticStatus::STALE;
-                msg->message = "Disconnected or lost";
-            }
-        }
-        status_pub->publish(*msg);
-    }
 
     void imuPublish() {
-        while(running) {
-            if (need_status_update) {
-                need_status_update = false;
-                publish_status();
-            }
 
-            if(!sensor_discovered) {
-                Delayms(200);
-                continue;
-            }
+        while(running) {
 
             while (serial_read_data(fd, reinterpret_cast<unsigned char*>(cBuff), 1))
             {
@@ -338,9 +257,6 @@ private:
     rclcpp::Publisher<sensor_msgs::msg::Imu>::SharedPtr imu_pub;
     rclcpp::Publisher<sensor_msgs::msg::MagneticField>::SharedPtr mag_pub;
     rclcpp::Publisher<sensor_msgs::msg::NavSatFix>::SharedPtr gps_pub;
-    rclcpp::Publisher<diagnostic_msgs::msg::DiagnosticStatus>::SharedPtr
-        status_pub;
-    rclcpp::TimerBase::SharedPtr status_update_timer;
     //rclcpp::Timer timer;
     std::atomic<bool> running{true};
     float fAcc[3], fGyro[3], fAngle[3];
@@ -348,9 +264,8 @@ private:
 	char cBuff[1];
     std::thread pubThread;
     std::string port;
-    std::string hardware_id;
     unsigned long baudrate;
-    bool reverse_pitch_roll, first_open = true, fd_opened = false, sensor_discovered = false, need_status_update = true;
+    bool reverse_pitch_roll;
 
 };
 
@@ -403,5 +318,39 @@ static void SensorDataUpdata(uint32_t uiReg, uint32_t uiRegNum)
 static void Delayms(uint16_t ucMs)
 {
 	usleep(ucMs * 1000);
+}
+
+static void AutoScanSensor(char *dev)
+{
+	int i, iRetry;
+	char cBuff[1];
+
+	for (i = 1; i < sizeof(c_uiBaud); i++)
+	{
+		serial_close(fd);
+        Delayms(1000);
+		s_iCurBaud = c_uiBaud[i];
+		fd = serial_open(dev, c_uiBaud[i]);
+
+		iRetry = 2;
+		do
+		{
+			s_cDataUpdate = 0;
+			WitReadReg(AX, 3);
+			Delayms(1000);
+			while (serial_read_data(fd, reinterpret_cast<unsigned char*>(cBuff), 1))
+			{
+				WitSerialDataIn(cBuff[0]);
+			}
+			if (s_cDataUpdate != 0)
+			{
+				printf("%d baud find sensor\r\n\r\n", c_uiBaud[i]);
+				return;
+			}
+			iRetry--;
+		} while (iRetry);
+	}
+	printf("can not find sensor\r\n");
+	printf("please check your connection\r\n");
 }
 

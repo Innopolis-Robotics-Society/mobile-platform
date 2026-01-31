@@ -9,7 +9,6 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(tf2 REQUIRED)
-find_package(diagnostic_msgs REQUIRED)
 
 
 include_directories(
@@ -29,7 +28,6 @@ ament_target_dependencies(
   "rclcpp"
   "sensor_msgs"
   "tf2"
-  "diagnostic_msgs"
 )
 
 install(TARGETS jy901s_imu_node
