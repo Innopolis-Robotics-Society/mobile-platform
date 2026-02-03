@@ -167,14 +167,14 @@ def generate_launch_description():
             ),
             
             # Wait 13 seconds total (3 more after sensor fusion), then launch path planner
-            # TimerAction(
-            #     period=13.0,
-            #     actions=[path_planner_launch]
-            # ),
+            TimerAction(
+                period=13.0,
+                actions=[path_planner_launch]
+            ),
             
             # Launch RViz immediately (or you can add a timer if you want it delayed)
             localization,
-            slam,
+            #slam,
             rviz_node,
             # Initialize starting pose
             # startPoseInit,

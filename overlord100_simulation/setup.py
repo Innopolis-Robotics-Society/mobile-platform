@@ -10,6 +10,7 @@ setup(
     version="0.0.0",
     packages=find_packages(exclude=["test"]),
     data_files=[
+        ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ("share/" + package_name, ["package.xml"]),
         (
             os.path.join("share", package_name, "launch"),
@@ -38,7 +39,6 @@ setup(
     maintainer_email="e.shlomov@innopolis.university",
     description="This package contains data for simulating the Overlord 100 mobile platform, but third-party products can also be launched through launch options",
     license="MIT",
-    tests_require=["pytest", "unittest"],
     entry_points={
         "console_scripts": ["converter = overlord100_simulation.converter:main"],
     },

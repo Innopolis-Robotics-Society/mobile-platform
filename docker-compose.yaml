@@ -1,89 +1,58 @@
 x-common: &common-setup
-  image: domrachev003/overlord100:0.0.2
   network_mode: host
   privileged: true
-  volumes: 
-    - ${HOME}/.Xauthority:/home/mobile/.Xauthority:rw
-    - .:/home/ws/src:rw
+  volumes:
+    - ${HOME}/.Xauthority:/home/fabian/.Xauthority:rw
+    - .:/home/fabian/ros2_ws/src:rw
     - /tmp/.X11-unix:/tmp/.X11-unix:rw
     - /dev/dri:/dev/dri:rw
+    - /run/user/1000/pulse:/run/user/1000/pulse
+    - /dev/v4l:/dev/v4l:ro
   environment:
-    - "DISPLAY"
-    - "QT_X11_NO_MITSHM=1"
-  ports:
-    - "9090:9090"
-  entrypoint: >
-    bash -c "
-      /home/ws/src/startup.bash && /bin/bash
-    "
+    - NVIDIA_VISIBLE_DEVICES=all
+    - NVIDIA_DRIVER_CAPABILITIES=compute,utility,video,graphics,display
+    - DISPLAY
+    - QT_X11_NO_MITSHM=1
+    - PULSE_SERVER=unix:/run/user/1000/pulse/native
+  working_dir: /home/fabian/ros2_ws
 
 services:
   terminal:
-    # Enter the terminal in /home/ws/src directory
     <<: *common-setup
-    stdin_open: true  # docker run -i
-    tty: true        # docker run -t
-    working_dir: /home/ws
-    command: []
-
-  terminal-hw:
-    # Enter the terminal in /home/ws/src directory
-    <<: *common-setup
-    network_mode: host
-    cap_add:
-      - NET_ADMIN
-    volumes:
-      - ${HOME}/.Xauthority:/home/mobile/.Xauthority:rw
-      - .:/home/ws/src:rw
-      - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - /dev/dri:/dev/dri:rw
-      - /dev:/dev
-    stdin_open: true  # docker run -i
-    tty: true        # docker run -t
-    working_dir: /home/ws
-    command: []
-
-  simulator:
-    <<: *common-setup
-    # Build the project with `colcon build` from /home/ws/src, source the project and run simulator
-    working_dir: /home/ws/src
-    stdin_open: true  # docker run -i
-    tty: true        # docker run -t
-    entrypoint: >
-      bash -c "
-        bash /home/ws/src/startup.bash &&
-        echo 'Starting' &&
-        cd /home/ws &&
-        source /opt/ros/humble/setup.bash &&
-        colcon build &&
-        source install/setup.bash &&
-        ros2 launch overlord100 sim.launch.py
-      "
-
-  hardware:
-    <<: *common-setup
-    # Build the project with `colcon build` from /home/ws/src, source the project and run hardware setup
-    network_mode: host
-    cap_add:
-      - NET_ADMIN
+    image: fabook/iros:v0.0.1
+    stdin_open: true
+    tty: true
     devices:
+      - /dev/video0:/dev/video0
+      - /dev/video1:/dev/video1
+      - /dev/snd:/dev/snd
+    group_add:
+      - "video"
+      - "44"
+    command: [
+      "/bin/bash","-lc","
+      exec bash"
+      ]
+
+  hw-terminal:
+    <<: *common-setup
+    image: fabook/iros:v0.0.1
+    stdin_open: true
+    tty: true
+    devices:
+      - /dev/video0:/dev/video0
+      - /dev/video1:/dev/video1
+      - /dev/snd:/dev/snd
+
       - "/dev/ttyACM0:/dev/ttyACM0"
       - "/dev/i2c-8:/dev/i2c-8"
       - "/dev/ttyTHS0:/dev/ttyTHS0"
       - "/dev/usb_2.3:/dev/usb_2.3"
       - "/dev/usb_2.4:/dev/usb_2.4"
-    working_dir: /home/ws/src
-    stdin_open: true  # docker run -i
-    tty: true        # docker run -t
-    entrypoint: >
-      bash -c "
-        bash /home/ws/src/startup.bash &&
-        echo 'sudo bash /home/ws/src/scripts/setup_hardware.sh' &&
-        echo 'Starting' &&
-        cd /home/ws &&
-        source /opt/ros/humble/setup.bash &&
-        colcon build &&
-        source install/setup.bash &&
-        ros2 launch overlord100 hardware.launch.py
-      "
-
+    group_add:
+      - "video"
+      - "44"
+    command: [
+      "/bin/bash","-lc","
+      exec bash"
+      ]

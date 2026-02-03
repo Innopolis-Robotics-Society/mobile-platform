@@ -20,7 +20,6 @@ setup(
     maintainer_email='i.domrachev@innopolis.university',
     description='A ROS2 package to manage maps, points, and routes in a MongoDB database.',
     license='TODO: License declaration',
-    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
             'database_node = overlord100_database.database_node:main',

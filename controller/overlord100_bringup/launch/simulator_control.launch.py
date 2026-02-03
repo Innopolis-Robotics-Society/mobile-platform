@@ -3,12 +3,6 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
-    logger = Node(
-        package="overlord100_logger",
-        executable="log_collector",
-        name="log_collector",
-        output="screen",
-    )
 
     controller = Node(
         package="overlord100_controller",
@@ -24,7 +18,6 @@ def generate_launch_description():
     return LaunchDescription(
         [
             # Start log_collector node
-            logger,
             controller,
             rqt_controller,
         ]

@@ -6,12 +6,6 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 
 def generate_launch_description():
-    logger = Node(
-        package="overlord100_logger",
-        executable="log_collector",
-        name="log_collector",
-        output="screen",
-    )
 
     ros2_controller = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -32,7 +26,6 @@ def generate_launch_description():
     return LaunchDescription(
         [
             # Start log_collector node
-            logger,
             ros2_controller,
             rqt_node_with_ros2_controller,
         ]
