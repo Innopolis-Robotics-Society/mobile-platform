@@ -1,0 +1,79 @@
+# =========================
+# ROS 2 / colcon workspace
+# =========================
+/build/
+/install/
+/log/
+/.colcon/
+/.ros/
+/ros2_ws.*.log
+
+# If you generate compile_commands.json via colcon/clangd
+/compile_commands.json
+
+# =========================
+# VS Code
+# =========================
+/.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+*.code-workspace
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual envs
+.venv/
+venv/
+ENV/
+env/
+
+# Packaging / tooling caches
+dist/
+build/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# =========================
+# C / C++
+# =========================
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+*.out
+*.app
+*.elf
+
+# CMake / build system leftovers (outside of ROS build/)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+*.ninja
+.ninja_*
+
+# =========================
+# OS junk
+# =========================
+.DS_Store
+Thumbs.db
