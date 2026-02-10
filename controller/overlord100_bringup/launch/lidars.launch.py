@@ -31,7 +31,7 @@ def generate_launch_description():
             name='lidar_back',
             parameters=[{'channel_type': 'serial',
                          'hardware_id': 'lidar: back/.4',
-                         'serial_port': '/dev/usb_2.4', 
+                         'serial_port': '/dev/usb_2.2', 
                          'serial_baudrate': 460800, 
                          'frame_id': 'lidar_back',
                          'inverted': False, 

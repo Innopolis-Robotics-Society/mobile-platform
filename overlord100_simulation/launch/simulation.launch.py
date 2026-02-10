@@ -55,6 +55,40 @@ def generate_launch_description():
     )
     converter = Node(package="overlord100_simulation", executable="converter")
 
+    rviz_node = Node(
+        package="rviz2",
+        namespace="",
+        executable="rviz2",
+        name="rviz2",
+        arguments=[
+            "-d",
+            [
+                os.path.join(
+                    get_package_share_directory("overlord100_simulation"),
+                    "rviz",
+                    "simulator.rviz",
+                )
+            ],
+        ],
+    )
+
+    ros2_controller = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [
+                os.path.join(get_package_share_directory("overlord100_controller"), "launch"),
+                "/controller.launch.py",
+            ]
+        )
+    )
+
+    rqt_node_with_ros2_controller = Node(
+        package="rqt_robot_steering",
+        executable="rqt_robot_steering",
+        remappings=[
+            ("/cmd_vel", "/overlord100_controller/cmd_vel_unstamped"),
+        ],
+    )
+    
     return LaunchDescription(
         [
             world_arg,
@@ -62,6 +96,9 @@ def generate_launch_description():
             spawn_models_node,
             bridge_setup_node,
             transforms,
-            # converter
+            converter,
+            rviz_node,
+            ros2_controller,
+            rqt_node_with_ros2_controller,
         ]
     )

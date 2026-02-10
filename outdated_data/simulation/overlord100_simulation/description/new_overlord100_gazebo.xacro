@@ -1,0 +1,506 @@
+<?xml version="1.0"?>
+
+<robot name="overlord100" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- wheels -->
+    <gazebo reference="right_wheel">
+        <mu1>100000000000000.0</mu1>
+        <mu2>100000000000000.0</mu2>
+        <kp>1000000000000.0</kp>
+        <kd>10.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>0.1</maxVel>
+        <fdir1>1 0 0</fdir1>
+    </gazebo>
+
+    <gazebo reference="left_wheel">
+        <mu1>100000000000000.0</mu1>
+        <mu2>100000000000000.0</mu2>
+        <kp>1000000000000.0</kp>
+        <kd>10.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>0.1</maxVel>
+        <fdir1>1 0 0</fdir1>
+    </gazebo>
+
+    <gazebo reference="front_left_dummy_wheel">
+        <mu1>0.001</mu1>
+        <mu2>0.001</mu2>
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>0.1</maxVel>
+    </gazebo>
+
+    <gazebo reference="front_right_dummy_wheel">
+        <mu1>0.001</mu1>
+        <mu2>0.001</mu2>
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>0.1</maxVel>
+    </gazebo>
+
+    <gazebo reference="back_left_dummy_wheel">
+        <mu1>0.001</mu1>
+        <mu2>0.001</mu2>
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>0.1</maxVel>
+    </gazebo>
+
+    <gazebo reference="back_right_dummy_wheel">
+        <mu1>0.001</mu1>
+        <mu2>0.001</mu2>
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>0.1</maxVel>
+    </gazebo>
+
+    <!-- lidars -->
+    <gazebo reference="lidar_front">
+        <sensor name="lidar_sensor_front" type="gpu_lidar">
+            <topic>laser_scan_front</topic>
+            <update_rate>10</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>500</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-1.4</min_angle>
+                        <max_angle>3.0</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.5</min>
+                    <max>12.0</max>
+                    <resolution>0.01</resolution>
+                </range>
+            </ray>
+            <always_on>1</always_on>
+            <visualize>true</visualize>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="lidar_back">
+        <sensor name="lidar_sensor_back" type="gpu_lidar">
+            <topic>laser_scan_back</topic>
+            <update_rate>10</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>500</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-4.5</min_angle>
+                        <max_angle>-0.1</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.5</min>
+                    <max>12.0</max>
+                    <resolution>0.01</resolution>
+                </range>
+            </ray>
+            <always_on>1</always_on>
+            <visualize>true</visualize>
+        </sensor>
+    </gazebo>
+
+    <!-- camera -->
+    <gazebo reference = "realsense">
+        <sensor name="d435_color" type="camera">
+            <always_on>1</always_on>
+            <update_rate>30</update_rate>
+            <visualize>1</visualize>
+            <pose>0 0 0 0 0 1.57075</pose>
+            <topic>/color_camera</topic>
+            <camera name="d435">
+                <horizontal_fov>1.21126</horizontal_fov>
+                <image>
+                    <width>640</width>
+                    <height>480</height>
+                    <format>RGB_INT8</format>
+                </image>
+                <clip>
+                    <near>0.1</near>
+                    <far>100</far>
+                </clip>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0</mean>
+                    <stddev>0.007</stddev>
+                </noise>
+            </camera>
+        </sensor>
+        <sensor name="d435_depth" type="depth_camera">
+            <always_on>1</always_on>
+            <update_rate>90</update_rate>
+            <visualize>0</visualize>
+            <pose>0 0 0 0 0 1.57075</pose>
+            <topic>/depth_camera</topic>
+            <camera name="d435">
+                <horizontal_fov>1.48702</horizontal_fov>
+                <image>
+                    <width>1280</width>
+                    <height>720</height>
+                </image>
+                <clip>
+                    <near>0.1</near>
+                    <far>100</far>
+                </clip>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0</mean>
+                    <stddev>0.1</stddev>
+                </noise>
+            </camera>
+        </sensor>
+    </gazebo>
+
+    <!-- sonars -->
+    <gazebo reference = "sonar1">
+        <sensor name='sonar_1' type='gpu_lidar'>
+            <always_on>1</always_on>
+            <update_rate>20</update_rate>
+            <visualize>1</visualize>
+            <topic>sonar_1_scan</topic>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>5</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>3</samples>
+                        <resolution>1</resolution>
+                        <min_angle>0</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.01</min>
+                    <max>4</max>
+                    <resolution>0.02</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.1</mean>
+                    <stddev>0.005</stddev>
+                </noise>
+            </ray>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference = "sonar2">
+        <sensor name='sonar_2' type='gpu_lidar'>
+        <always_on>1</always_on>
+        <update_rate>20</update_rate>
+        <visualize>1</visualize>
+        <topic>sonar_2_scan</topic>
+        <ray>
+            <scan>
+                <horizontal>
+                    <samples>5</samples>
+                    <resolution>1</resolution>
+                    <min_angle>-0.14835</min_angle>
+                    <max_angle>0.14835</max_angle>
+                </horizontal>
+                <vertical>
+                    <samples>3</samples>
+                    <resolution>1</resolution>
+                    <min_angle>0</min_angle>
+                    <max_angle>0.14835</max_angle>
+                </vertical>
+            </scan>
+            <range>
+                <min>0.01</min>
+                <max>4</max>
+                <resolution>0.02</resolution>
+            </range>
+            <noise>
+                <type>gaussian</type>
+                <mean>0.1</mean>
+                <stddev>0.005</stddev>
+            </noise>
+        </ray>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference = "sonar3">
+        <sensor name='sonar_3' type='gpu_lidar'>
+            <always_on>1</always_on>
+            <update_rate>20</update_rate>
+            <visualize>1</visualize>
+            <topic>sonar_3_scan</topic>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>5</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>3</samples>
+                        <resolution>1</resolution>
+                        <min_angle>0</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.01</min>
+                    <max>4</max>
+                    <resolution>0.02</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.1</mean>
+                    <stddev>0.005</stddev>
+                </noise>
+            </ray>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference = "sonar4">
+        <sensor name='sonar_4' type='gpu_lidar'>
+            <always_on>1</always_on>
+            <update_rate>20</update_rate>
+            <visualize>1</visualize>
+            <topic>sonar_4_scan</topic>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>5</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>3</samples>
+                        <resolution>1</resolution>
+                        <min_angle>0</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.01</min>
+                    <max>4</max>
+                    <resolution>0.02</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.1</mean>
+                    <stddev>0.005</stddev>
+                </noise>
+            </ray>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference = "sonar5">
+        <sensor name='sonar_5' type='gpu_lidar'>
+            <always_on>1</always_on>
+            <update_rate>20</update_rate>
+            <visualize>1</visualize>
+            <topic>sonar_5_scan</topic>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>5</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>3</samples>
+                        <resolution>1</resolution>
+                        <min_angle>0</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.01</min>
+                    <max>4</max>
+                    <resolution>0.02</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.1</mean>
+                    <stddev>0.005</stddev>
+                </noise>
+            </ray>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference = "sonar6">
+        <sensor name='sonar_6' type='gpu_lidar'>
+            <always_on>1</always_on>
+            <update_rate>20</update_rate>
+            <visualize>1</visualize>
+            <topic>sonar_6_scan</topic>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>5</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>3</samples>
+                        <resolution>1</resolution>
+                        <min_angle>0</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.01</min>
+                    <max>4</max>
+                    <resolution>0.02</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.1</mean>
+                    <stddev>0.005</stddev>
+                </noise>
+            </ray>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference = "sonar7">
+        <sensor name='sonar_7' type='gpu_lidar'>
+            <always_on>1</always_on>
+            <update_rate>20</update_rate>
+            <visualize>1</visualize>
+            <topic>sonar_7_scan</topic>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>5</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>3</samples>
+                        <resolution>1</resolution>
+                        <min_angle>0</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.01</min>
+                    <max>4</max>
+                    <resolution>0.02</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.1</mean>
+                    <stddev>0.005</stddev>
+                </noise>
+            </ray>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference = "sonar8">
+        <sensor name='sonar_8' type='gpu_lidar'>
+            <always_on>1</always_on>
+            <update_rate>20</update_rate>
+            <visualize>1</visualize>
+            <topic>sonar_8_scan</topic>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>5</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0f.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>3</samples>
+                        <resolution>1</resolution>
+                        <min_angle>0</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.01</min>
+                    <max>4</max>
+                    <resolution>0.02</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.1</mean>
+                    <stddev>0.005</stddev>
+                </noise>
+            </ray>
+        </sensor>
+    </gazebo>
+
+    <!-- imu -->
+    <gazebo>
+        <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+    </gazebo>
+
+    <gazebo reference="base_link">
+        <sensor name="imu_sensor" type="imu">
+            <always_on>1</always_on>
+            <update_rate>1</update_rate>
+            <visualize>true</visualize>
+            <topic>imu</topic>
+        </sensor>
+    </gazebo>
+
+    <!-- other plugins -->
+    <gazebo>
+        <plugin
+            filename="libignition-gazebo-joint-state-publisher-system.so"
+            name="ignition::gazebo::systems::JointStatePublisher">
+        </plugin>
+
+        <plugin
+            filename="libignition-gazebo-odometry-publisher-system"
+            name="ignition::gazebo::systems::OdometryPublisher">
+            <odom_publish_frequency>50</odom_publish_frequency>
+            <odom_topic>/odom</odom_topic>
+            <odom_frame>odom</odom_frame>
+            <robot_base_frame>base_link</robot_base_frame>
+            <tf_topic>/odom/tf</tf_topic>
+        </plugin>
+
+        <plugin
+            filename="ignition-gazebo-joint-controller-system"
+            name="ignition::gazebo::systems::JointController">
+            <joint_name>base_link_to_left_wheel</joint_name>
+            <initial_velocity>0</initial_velocity>
+        </plugin>
+
+        <plugin
+            filename="ignition-gazebo-joint-controller-system"
+            name="ignition::gazebo::systems::JointController">
+            <joint_name>base_link_to_right_wheel</joint_name>
+            <initial_velocity>0</initial_velocity>
+        </plugin> 
+        
+        <!-- <plugin
+        filename="libignition-gazebo-diff-drive-system.so"
+        name="ignition::gazebo::systems::DiffDrive">
+        <left_joint>base_link_to_left_wheel</left_joint>
+        <right_joint>base_link_to_right_wheel</right_joint>
+        <wheel_separation>0.6</wheel_separation>
+        <wheel_radius>0.065</wheel_radius>
+        <odom_publish_frequency>1</odom_publish_frequency>
+        <topic>/regular_driver</topic>
+
+        </plugin> -->
+
+        <plugin filename="libignition-gazebo-sensors-system.so"
+        name="ignition::gazebo::systems::Sensors">
+        <render_engine>ogre2</render_engine>
+        </plugin>
+    </gazebo>
+
+</robot>

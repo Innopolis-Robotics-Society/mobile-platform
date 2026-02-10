@@ -1,5 +1,0 @@
-string map_name
-string point_name
----
-bool success
-string message
