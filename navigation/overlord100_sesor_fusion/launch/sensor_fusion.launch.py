@@ -8,14 +8,24 @@ import os
 
 def generate_launch_description():
 
+    use_sim_time = LaunchConfiguration("use_sim_time")
+
     robot_localization = Node(
         package="robot_localization",
         executable="ekf_node",
         name="ekf_filter_node",
         output="screen",
-        parameters=[os.path.join(get_package_share_directory("overlord100_sensor_fusion"), "config", "ekf2.yaml")],
+        parameters=[
+            os.path.join(get_package_share_directory("overlord100_sensor_fusion"), "config", "ekf2.yaml"),
+            {"use_sim_time": use_sim_time},
+                        ],
     )
 
     return LaunchDescription([
+        DeclareLaunchArgument(
+            "use_sim_time",
+            default_value="False",
+            description="Use simulation clock",
+        ),
         robot_localization
     ])

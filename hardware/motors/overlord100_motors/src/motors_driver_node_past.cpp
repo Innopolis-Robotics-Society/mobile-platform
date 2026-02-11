@@ -47,9 +47,9 @@ class MotorsDriverNode : public rclcpp::Node {
         CAN_IN_TOPIC, 10,
         std::bind(&MotorsDriverNode::get_heartbeat, this, _1));
 
-    syncronous_velocity_control_init();
+    //syncronous_velocity_control_init();
 
-    last_beat = this->now();
+    last_beat = rclcpp::Time(0, 0, this->now().get_clock_type()); //this->now();
     // timer_ = this->create_wall_timer(500ms,
     // std::bind(&MotorsDriverNode::syncronous_velocity_control_init, this));
 
@@ -175,7 +175,7 @@ class MotorsDriverNode : public rclcpp::Node {
   rclcpp::Time last_beat;
   std::string hardware_id;
 
-  uint8_t last_heartbeat_state = 0x04;
+  uint8_t last_heartbeat_state = 0x00;
 
   rclcpp::TimerBase::SharedPtr timer_;
 };

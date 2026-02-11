@@ -18,6 +18,7 @@ def generate_launch_description():
         name="rviz2",
         output="log",
         arguments=["-d", rviz_config_file],
+        parameters=[{"use_sim_time": LaunchConfiguration("use_sim_time")}],
     )
 
     use_sim_time = DeclareLaunchArgument(
@@ -98,7 +99,10 @@ def generate_launch_description():
                     ]
                 )
             ]
-        )
+        ),
+        launch_arguments=[
+            ("use_sim_time", LaunchConfiguration("use_sim_time")),
+        ],
     )
     
     localization = IncludeLaunchDescription(
@@ -116,6 +120,9 @@ def generate_launch_description():
             "launch",
             "slam.launch.py"
         ),
+        launch_arguments=[
+            ("use_sim_time", LaunchConfiguration("use_sim_time")),
+        ],
         condition=IfCondition(use_slam)
     )
 
@@ -134,7 +141,7 @@ def generate_launch_description():
         ),
         launch_arguments=[
             ("use_sim_time", LaunchConfiguration("use_sim_time")),
-            ("slam", LaunchConfiguration("run_mapping")),
+            ("slam", LaunchConfiguration("use_slam")),
             ("map_file", LaunchConfiguration("map_file")),
         ],
     )
