@@ -197,7 +197,7 @@ Visualization Manager:
           Value: true
         back_right_dummy_wheel:
           Value: true
-        base_footprint:
+        base_link:
           Value: true
         base_link:
           Value: true
@@ -264,7 +264,7 @@ Visualization Manager:
       Show Names: false
       Tree:
         odom:
-          base_footprint:
+          base_link:
             base_link:
               back_left_dummy_wheel:
                 {}

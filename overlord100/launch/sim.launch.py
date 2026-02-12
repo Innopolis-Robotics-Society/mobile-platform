@@ -31,7 +31,7 @@ def generate_launch_description():
     
     use_slam_arg = DeclareLaunchArgument(
         "use_slam",
-        default_value="false"
+        default_value="False"
     )
     
     map_file = DeclareLaunchArgument(
@@ -157,25 +157,25 @@ def generate_launch_description():
             
             # Wait 3 seconds, then launch lidar merge
             TimerAction(
-                period=3.0,
+                period=1.0,
                 actions=[merge_lidars]
             ),
             
             # Wait 6 seconds total (3 more after lidar merge), then launch controller
             TimerAction(
-                period=6.0,
+                period=2.0,
                 actions=[controller_launch]
             ),
             
             # Wait 10 seconds total (4 more after controller), then launch sensor fusion
             TimerAction(
-                period=10.0,
+                period=3.0,
                 actions=[sensor_fusion_launch]
             ),
             
             # Wait 13 seconds total (3 more after sensor fusion), then launch path planner
             TimerAction(
-                period=13.0,
+                period=4.0,
                 actions=[path_planner_launch]
             ),
             

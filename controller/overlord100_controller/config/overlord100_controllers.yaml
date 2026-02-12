@@ -34,7 +34,7 @@ overlord100_controller:
     cmd_vel_timeout: 0.5
 
     # Base frame_id
-    base_frame_id: base_footprint #default: base_link
+    base_frame_id: base_link #default: base_link
 
     # Publish limited velocity
     publish_limited_velocity: true

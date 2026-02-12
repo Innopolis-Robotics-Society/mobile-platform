@@ -8,8 +8,6 @@
     <!-- Include ROS2 Control -->
     <xacro:include filename="$(find overlord100_simulation)/description/overlord100_control.xacro" />
 
-    <link name="base_footprint"/>
-
     <link name="base_link">
         <visual>
             <origin rpy="0 0 -1.57075" xyz="0 0 -0.20" />
@@ -29,12 +27,6 @@
             </geometry>
         </collision>
     </link>
-
-    <joint name="base_joint" type="fixed">
-        <parent link="base_footprint" />
-        <child link="base_link" />
-        <origin rpy="0 0 0" xyz="0 0 0.20" />
-    </joint>
 
     <!-- wheels -->
     <link name="left_wheel">

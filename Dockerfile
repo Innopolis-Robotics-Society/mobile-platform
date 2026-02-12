@@ -168,6 +168,7 @@ RUN apt-get update && apt-get upgrade -y && \
     ros-${ROS_DISTRO}-ros2-control \
     ros-${ROS_DISTRO}-controller-manager \
     ros-${ROS_DISTRO}-ros2-controllers \
+    ros-${ROS_DISTRO}-topic-tools \
     --fix-missing
 
 # ROS Gazebo

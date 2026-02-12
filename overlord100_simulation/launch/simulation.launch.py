@@ -61,7 +61,7 @@ def generate_launch_description():
             use_sim_time,
             spawn_models_node,
             bridge_setup_node,
-            transforms,
+            #transforms,
             # converter
         ]
     )

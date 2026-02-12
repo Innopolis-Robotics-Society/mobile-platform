@@ -16,17 +16,24 @@ def generate_launch_description():
         )
     )
     
+    cmd_vel_relay = Node(
+        package="topic_tools",
+        executable="relay",
+        arguments=["/cmd_vel", "/overlord100_controller/cmd_vel_unstamped"],
+        output="screen",
+    )
+
     rqt_node_with_ros2_controller = Node(
         package="rqt_robot_steering",
         executable="rqt_robot_steering",
         remappings=[
-            ("/cmd_vel", "/overlord100_controller/cmd_vel_unstamped"),
         ],
     )
     return LaunchDescription(
         [
             # Start log_collector node
             ros2_controller,
+            cmd_vel_relay,
             rqt_node_with_ros2_controller,
         ]
     )

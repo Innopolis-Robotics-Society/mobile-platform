@@ -6,7 +6,7 @@ amcl:
     alpha3: 0.2
     alpha4: 0.2
     alpha5: 0.2
-    base_frame_id: "base_footprint" 
+    base_frame_id: "base_link" 
     beam_skip_distance: 0.5
     beam_skip_error_threshold: 0.9
     beam_skip_threshold: 0.3
@@ -115,7 +115,7 @@ controller_server:
   ros__parameters:
     use_sim_time: False
     controller_frequency: 20.0
-    # base_frame_id: "chassis1" #"base_footprint"
+    # base_frame_id: "chassis1" #"base_link"
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
@@ -358,7 +358,7 @@ slam_toolbox:
     # ROS Parameters
     odom_frame: odom
     map_frame: map
-    base_frame: base_footprint
+    base_frame: base_link
     scan_topic: /scan
     use_map_saver: true
     mode: mapping #localization
