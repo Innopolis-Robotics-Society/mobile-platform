@@ -1,6 +1,6 @@
-# Overlord100 Mobile Platform
+# iros_mobile_platform Mobile Platform
 
-This repository integrates hardware, frontend, and backend modules for the Overlord100 Mobile Platform. The backend module consists of the following components:
+This repository integrates hardware, frontend, and backend modules for the iros_mobile_platform Mobile Platform. The backend module consists of the following components:
 
 1. **Controller**: Includes the high-level controller and various infrastructure packages such as the log collector and mode switcher.
 2. **SLAM**: Provides Simultaneous Localization and Mapping functionalities.
@@ -30,14 +30,14 @@ Inside there, you have to build the project manually:
 source /opt/ros/humble/setup.bash
 colcon build
 source install/setup.bash
-ros2 launch overlord100 sim.launch.py
+ros2 launch iros_mobile_platform sim.launch.py
 ```
 
 #### SLAM, simulator
 
 To start mapping, set launch argument `run_mapping` for `sim.launch.py` to `True`:
 ```bash
-ros2 launch overlord100 sim.launch.py run_mapping:=True
+ros2 launch iros_mobile_platform sim.launch.py run_mapping:=True
 ```
 
 
@@ -50,9 +50,9 @@ ros2 run nav2_map_server map_saver_cli -f <new_map_name>
 
 To use a specific map for SLAM in simulator, provide map file to the launch argument `map_file` for `sim.launch.py`:
 ```bash
-ros2 launch overlord100 sim.launch.py map_file:=<map_file>
+ros2 launch iros_mobile_platform sim.launch.py map_file:=<map_file>
 ```
-> **_NOTE:_** The map file is expected in the directory `/overlord100/maps`
+> **_NOTE:_** The map file is expected in the directory `/iros_mobile_platform/maps`
 
 #### Launching hardware
 TBD
@@ -78,7 +78,7 @@ RUN apt-get install -y ros-humble-slam-toolbox ros-humble-navigation2 ros-humble
 source /opt/ros/humble/setup.bash
 colcon build
 source install/setup.bash
-ros2 launch overlord100 sim.launch.py
+ros2 launch iros_mobile_platform sim.launch.py
 ```
 #### Launching hardware
 TBD

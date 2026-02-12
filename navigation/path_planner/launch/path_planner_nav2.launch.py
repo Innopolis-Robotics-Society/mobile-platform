@@ -39,7 +39,7 @@ def generate_launch_description():
     # Path to the map file
     map = PathJoinSubstitution(
         [
-            FindPackageShare("overlord100"),
+            FindPackageShare("iros_mobile_platform"),
             "maps",
             LaunchConfiguration("map_file"),
         ]

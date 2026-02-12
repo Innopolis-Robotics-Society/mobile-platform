@@ -21,7 +21,7 @@ find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(std_srvs REQUIRED)
 find_package(diagnostic_msgs REQUIRED)
-# find_package(overlord100_msgs REQUIRED)
+# find_package(iros_mobile_platform_msgs REQUIRED)
 
 # TODO: check if there is better way to include files from other package
 set(SLLIDAR_RELATIVE_PATH "../lidar")

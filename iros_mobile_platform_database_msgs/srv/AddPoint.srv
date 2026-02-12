@@ -1,0 +1,4 @@
+iros_mobile_platform_database_msgs/Point point
+---
+bool success
+string message

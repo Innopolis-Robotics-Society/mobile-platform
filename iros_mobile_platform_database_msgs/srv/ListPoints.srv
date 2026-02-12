@@ -1,0 +1,3 @@
+string map_name
+---
+iros_mobile_platform_database_msgs/Point[] points

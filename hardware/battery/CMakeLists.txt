@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(overlord100_battery)
+project(iros_mobile_platform_battery)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)

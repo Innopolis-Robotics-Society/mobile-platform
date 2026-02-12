@@ -1,4 +1,4 @@
-* moved sensor fusion to `overlord100_localization`, but sim.launch still uses `overlord100_sensor_fusion`.
+* moved sensor fusion to `iros_mobile_platform_localization`, but sim.launch still uses `iros_mobile_platform_sensor_fusion`.
 * *amcl* based localization is currently working
     * but sensor fusion seems to not work fully or with mistakes
         * maybe wrong model config in controller, like wheel sep, wheel rad compared to urdf

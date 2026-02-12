@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- Basic differential drive mobile base -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="iros_mobile_platform_simulation_test">
+  <xacro:arg name="prefix" default="" />
+  <xacro:arg name="use_mock_hardware" default="false" />
+
+  <xacro:include filename="$(find iros_mobile_platform_description)/description/iros_mobile_platform_description.urdf.xacro" />
+  
+  <xacro:include filename="$(find iros_mobile_platform_description)/description/iros_mobile_platform.ros2_control.xacro" />
+
+  <xacro:iros_mobile_platform prefix="$(arg prefix)" />
+
+  <xacro:iros_mobile_platform_ros2_control
+    name="iros_mobile_platform" prefix="$(arg prefix)" use_mock_hardware="$(arg use_mock_hardware)"/>
+
+</robot>

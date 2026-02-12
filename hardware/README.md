@@ -1,5 +1,5 @@
 # Hardware Module
-This repository contains the hardware interface modules for the Overlord100_v2.0 project, including battery monitoring, motor control, and LiDAR integration.
+This repository contains the hardware interface modules for the iros_mobile_platform_v2.0 project, including battery monitoring, motor control, and LiDAR integration.
 
 ## Battery Monitoring
 The `battery_monitor.cpp` handles battery voltage measurement using the ADS1115 ADC and publishes the data as a ROS 2 BatteryState message.
@@ -33,4 +33,4 @@ Battery Monitoring:
 `ros2 topic echo /battery_state`
 
 Motor Control: 
-`ros2 topic pub /wheels_control overlord100_msgs/msg/WheelsData "{left: 100, right: 100}"`
+`ros2 topic pub /wheels_control iros_mobile_platform_msgs/msg/WheelsData "{left: 100, right: 100}"`

@@ -204,27 +204,27 @@ Visualization Manager:
           Value: true
         odom:
           Value: true
-        overlord100/chassis/d435_depth:
+        iros_mobile_platform/chassis/d435_depth:
           Value: true
-        overlord100/chassis/lidar_sensor_back:
+        iros_mobile_platform/chassis/lidar_sensor_back:
           Value: true
-        overlord100/chassis/lidar_sensor_front:
+        iros_mobile_platform/chassis/lidar_sensor_front:
           Value: true
-        overlord100/chassis/sonar_1:
+        iros_mobile_platform/chassis/sonar_1:
           Value: true
-        overlord100/chassis/sonar_2:
+        iros_mobile_platform/chassis/sonar_2:
           Value: true
-        overlord100/chassis/sonar_3:
+        iros_mobile_platform/chassis/sonar_3:
           Value: true
-        overlord100/chassis/sonar_4:
+        iros_mobile_platform/chassis/sonar_4:
           Value: true
-        overlord100/chassis/sonar_5:
+        iros_mobile_platform/chassis/sonar_5:
           Value: true
-        overlord100/chassis/sonar_6:
+        iros_mobile_platform/chassis/sonar_6:
           Value: true
-        overlord100/chassis/sonar_7:
+        iros_mobile_platform/chassis/sonar_7:
           Value: true
-        overlord100/chassis/sonar_8:
+        iros_mobile_platform/chassis/sonar_8:
           Value: true
         realsense:
           Value: true
@@ -262,39 +262,39 @@ Visualization Manager:
               front_right_dummy_wheel:
                 {}
               lidar_back:
-                overlord100/chassis/lidar_sensor_back:
+                iros_mobile_platform/chassis/lidar_sensor_back:
                   {}
               lidar_front:
-                overlord100/chassis/lidar_sensor_front:
+                iros_mobile_platform/chassis/lidar_sensor_front:
                   {}
               lidar_virtual:
                 {}
               realsense:
-                overlord100/chassis/d435_depth:
+                iros_mobile_platform/chassis/d435_depth:
                   {}
               sonar1:
-                overlord100/chassis/sonar_1:
+                iros_mobile_platform/chassis/sonar_1:
                   {}
               sonar2:
-                overlord100/chassis/sonar_2:
+                iros_mobile_platform/chassis/sonar_2:
                   {}
               sonar3:
-                overlord100/chassis/sonar_3:
+                iros_mobile_platform/chassis/sonar_3:
                   {}
               sonar4:
-                overlord100/chassis/sonar_4:
+                iros_mobile_platform/chassis/sonar_4:
                   {}
               sonar5:
-                overlord100/chassis/sonar_5:
+                iros_mobile_platform/chassis/sonar_5:
                   {}
               sonar6:
-                overlord100/chassis/sonar_6:
+                iros_mobile_platform/chassis/sonar_6:
                   {}
               sonar7:
-                overlord100/chassis/sonar_7:
+                iros_mobile_platform/chassis/sonar_7:
                   {}
               sonar8:
-                overlord100/chassis/sonar_8:
+                iros_mobile_platform/chassis/sonar_8:
                   {}
       Update Interval: 0
       Value: true
