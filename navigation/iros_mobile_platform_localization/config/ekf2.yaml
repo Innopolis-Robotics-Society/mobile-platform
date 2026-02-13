@@ -33,7 +33,6 @@ ekf_filter_node:
       #     3a. Set your "world_frame" to your map_frame value
       #     3b. MAKE SURE something else is generating the odom->base_link transform. Note that this can even be another state
       #         estimation node from robot_localization! However, that instance should *not* fuse the global data.
-      map_frame: map              # Defaults to "map" if unspecified
       odom_frame: odom            # Defaults to "odom" if unspecified
       base_link_frame: base_link # Defaults to "base_link" if unspecified
       world_frame: odom           # Defaults to the value of odom_frame if unspecified
@@ -53,9 +52,9 @@ ekf_filter_node:
                     false, false, true,
                     false, false, false,
                     false, false, true,
-                    true,  false, false]
+                    false, false, false]
 
-      imu0_differential: true
+      imu0_differential: false
       imu0_pose_use_child_frame: false
 
       # The filter accepts an arbitrary number of inputs from each input message type (nav_msgs/Odometry,
@@ -74,8 +73,8 @@ ekf_filter_node:
       # if unspecified, effectively making this parameter required for each sensor.
       odom0_config: [false, false, false,
                      false, false, false,
-                     true,  true,  false,
-                     false, false, false,
+                     true,  false,  false,
+                     false, false, true,
                      false, false, false]
 
       # [ADVANCED] When measuring one pose variable with two sensors, a situation can arise in which both sensors under-
@@ -86,7 +85,7 @@ ekf_filter_node:
       # data is converted to velocity data by differentiating the absolute pose measurements. These velocities are then
       # integrated as usual. NOTE: this only applies to sensors that provide pose measurements; setting differential to true
       # for twist measurements has no effect.
-      odom0_differential: true
+      odom0_differential: false
       odom0_pose_use_child_frame: false
 
       # [ADVANCED] The process noise covariance matrix can be difficult to tune, and can vary for each application, so it is
