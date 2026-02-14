@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 import os
 from glob import glob
 
-package_name = "path_planner"
+package_name = "iros_mobile_platform_path_planner"
 
 setup(
     name=package_name,

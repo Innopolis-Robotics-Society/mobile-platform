@@ -9,11 +9,12 @@ from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time")
     amcl_config = LaunchConfiguration("amcl_config")
+    map_path = LaunchConfiguration("map_path")
     lifecycle_nodes = ["map_server","amcl" ]
     
     use_sim_time_arg = DeclareLaunchArgument(
         "use_sim_time",
-        default_value="true"
+        default_value="false"
     )
 
     amcl_config_arg = DeclareLaunchArgument(
@@ -26,12 +27,16 @@ def generate_launch_description():
         description="Full path to amcl yaml file to load"
     )
     
-    map_path = PathJoinSubstitution([
-        get_package_share_directory("iros_mobile_platform_mapping"),
-        "maps",
-        "map.yaml"
-    ])
-    
+    map_path_arg = DeclareLaunchArgument(
+        "map_path",
+        default_value=PathJoinSubstitution([
+            get_package_share_directory("iros_mobile_platform_mapping"),
+            "maps",
+            "map.yaml"
+        ]),
+        description="Full path to amcl yaml file to load"
+    )
+        
     nav2_map_server = Node(
         package="nav2_map_server",
         executable="map_server",
@@ -69,6 +74,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         use_sim_time_arg,
+        map_path_arg,
         amcl_config_arg,
         nav2_map_server,
         nav2_amcl,

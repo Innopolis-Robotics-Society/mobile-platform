@@ -121,20 +121,20 @@ def generate_launch_description():
         name="battery_monitor",
         output="screen",
     )
-    path_planner_launch = IncludeLaunchDescription(
+    iros_mobile_platform_path_planner_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [
                 PathJoinSubstitution(
                     [
-                        FindPackageShare("path_planner"),
+                        FindPackageShare("iros_mobile_platform_path_planner"),
                         "launch",
-                        "path_planner_nav2.launch.py",
+                        "iros_mobile_platform_path_planner_nav2.launch.py",
                     ]
                 )
             ]
         ),
         launch_arguments=[
-            ("use_sim_time", "False"),
+            ("use_sim_time", "false"),
             ("slam", LaunchConfiguration("run_mapping")),
             ("map_file", LaunchConfiguration("map_file")),
         ],
@@ -170,7 +170,7 @@ def generate_launch_description():
             controller_launch,
             # Launch the path planner
             #slam_launch,
-            path_planner_launch,
+            iros_mobile_platform_path_planner_launch,
             # Merge two laserscans together
             merge_lidars,
             # Finally launch RViz

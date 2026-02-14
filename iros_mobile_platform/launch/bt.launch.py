@@ -11,7 +11,7 @@ import os
 
 def generate_launch_description():
     # RViz node
-    nav2_yaml = "/home/ws/src/navigation/path_planner/config/nav2_params.yaml"
+    nav2_yaml = "/home/ws/src/navigation/iros_mobile_platform_path_planner/config/nav2_params.yaml"
     lifecycle_nodes = ['map_server', 
                        'amcl',
                        'planner_server',
@@ -31,7 +31,7 @@ def generate_launch_description():
 
     use_sim_time = DeclareLaunchArgument(
         "use_sim_time",
-        default_value="False",
+        default_value="false",
         description="Use simulation (Gazebo) clock if launch argument is 'True'",
     )
     run_mapping = DeclareLaunchArgument(

@@ -7,12 +7,12 @@ from launch_ros.actions import Node  # Add this import
 
 
 def generate_launch_description():
-    declare_slam_cmd = DeclareLaunchArgument(
+    declare_slam_arg = DeclareLaunchArgument(
         "slam",
         default_value="False",
         description="Whether run a SLAM",
     )
-    declare_autostart_cmd = DeclareLaunchArgument(
+    declare_autostart_arg = DeclareLaunchArgument(
         "autostart",
         default_value="True",
         description="Automatically startup the nav2 stack",
@@ -21,7 +21,7 @@ def generate_launch_description():
         "params_file",
         default_value=PathJoinSubstitution(
             [
-                FindPackageShare("path_planner"),
+                FindPackageShare("iros_mobile_platform_path_planner"),
                 "config",
                 "nav2_params.yaml",
             ]
@@ -33,7 +33,7 @@ def generate_launch_description():
     )
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
-        "use_sim_time", default_value="False", description="Use simulation (Gazebo) clock if true"
+        "use_sim_time", default_value="false", description="Use simulation (Gazebo) clock if true"
     )
 
     # Path to the map file
@@ -59,8 +59,8 @@ def generate_launch_description():
     ld = LaunchDescription(
         [
             declare_use_sim_time_cmd,
-            declare_autostart_cmd,
-            declare_slam_cmd,
+            declare_autostart_arg,
+            declare_slam_arg,
             param_file,
             map_file,
             nav2_bringup_launch,

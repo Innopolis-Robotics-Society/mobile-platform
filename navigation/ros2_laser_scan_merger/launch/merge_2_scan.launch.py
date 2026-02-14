@@ -19,7 +19,7 @@ def generate_launch_description():
     # )
     use_sim_time = DeclareLaunchArgument(
         "use_sim_time",
-        default_value="True", #TO-DO
+        default_value="false", #TO-DO
         description="Use simulation (Gazebo) clock if launch argument is 'True'",
     )
 
@@ -41,18 +41,7 @@ def generate_launch_description():
                 respawn=True,
                 respawn_delay=2,
             ),
-            # TF2 for laser to map frame id, optional
-            # launch_ros.actions.Node(
-            #     package='tf2_ros',
-            #     executable='static_transform_publisher',
-            #     name='static_transform_publisher',
-            #     arguments=[
-            #         '--x', '0', '--y', '0', '--z', '0',
-            #         '--qx', '0', '--qy', '0', '--qz', '0', '--qw', '1',
-            #         '--frame-id', 'map', '--child-frame-id', 'laser'
-            #     ]
-            # ),
-            # Call pointcloud_to_laserscan package
+
             launch_ros.actions.Node(
                 name="pointcloud_to_laserscan",
                 package="pointcloud_to_laserscan",
