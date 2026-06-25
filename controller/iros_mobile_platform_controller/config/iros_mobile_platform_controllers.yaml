@@ -1,7 +1,7 @@
 controller_manager:
   ros__parameters:
     update_rate: 100 # Hz
-    use_sim_time: true
+    use_sim_time: false
 
     iros_mobile_platform_controller:
       type: diff_drive_controller/DiffDriveController
@@ -23,8 +23,8 @@ iros_mobile_platform_controller:
     pose_covariance_diagonal : [0.001, 0.001, 1.0e-3, 1.0e-3, 1.0e-3, 0.01]
     twist_covariance_diagonal: [0.001, 0.001, 1.0e-3, 1.0e-3, 1.0e-3, 0.01]
 
-    wheel_separation : 0.575
-    wheel_radius : 0.065
+    wheel_separation : 0.62
+    wheel_radius : 0.126
 
     wheel_separation_multiplier: 1.0
     left_wheel_radius_multiplier: 1.0

@@ -58,7 +58,7 @@
       <collision>
         <origin rpy="0 1.57075 0" xyz="0 0 0" />
         <geometry>
-          <cylinder radius="0.07" length="0.06" />
+          <cylinder radius="0.126" length="0.06" />
         </geometry>
       </collision>
 
@@ -69,7 +69,7 @@
       <limit effort="1000.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="100.0" />
       <parent link="chassis" />
       <child link="left_wheel" />
-      <origin rpy="0 0 3.14" xyz="-0.33 -0.045 -0.15" />
+      <origin rpy="0 0 3.14" xyz="-0.31 -0.045 -0.15" />
     </joint>
 
     <link name="lidar_front">
@@ -141,7 +141,7 @@
       <collision>
         <origin rpy="0 1.57075 0" xyz="0 0 0" />
         <geometry>
-          <cylinder radius="0.07" length="0.06" />
+          <cylinder radius="0.126" length="0.06" />
         </geometry>
       </collision>
     </link>
@@ -151,7 +151,7 @@
       <limit effort="1000.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="100.0" />
       <parent link="chassis" />
       <child link="right_wheel" />
-      <origin rpy="0 0 3.14" xyz="0.33 -0.045 -0.15" />
+      <origin rpy="0 0 3.14" xyz="0.31 -0.045 -0.15" />
     </joint>
 
     <link name="front_left_dummy_wheel">
@@ -170,7 +170,7 @@
 
       <collision>
         <geometry>
-          <sphere radius="0.07" />
+          <sphere radius="0.126" />
         </geometry>
       </collision>
     </link>
@@ -197,7 +197,7 @@
 
       <collision>
         <geometry>
-          <sphere radius="0.07" />
+          <sphere radius="0.126" />
         </geometry>
       </collision>
     </link>
@@ -224,7 +224,7 @@
 
       <collision>
         <geometry>
-          <sphere radius="0.07" />
+          <sphere radius="0.126" />
         </geometry>
       </collision>
     </link>
@@ -246,7 +246,7 @@
 
       <collision>
         <geometry>
-          <sphere radius="0.07" />
+          <sphere radius="0.126" />
         </geometry>
       </collision>
 
@@ -325,8 +325,8 @@
         <right_joint>chassis_to_right_wheel</right_joint>
 
         <!-- kinematics -->
-        <wheel_separation>0.34</wheel_separation>
-        <wheel_diameter>0.14</wheel_diameter>
+        <wheel_separation>0.62</wheel_separation>
+        <wheel_diameter>0.252</wheel_diameter>
 
         <!-- limits -->
         <max_wheel_torque>20</max_wheel_torque>
