@@ -27,6 +27,11 @@ def generate_launch_description():
         "map_file",
         default_value="map.yaml",
     )
+    use_sim_time = DeclareLaunchArgument(
+        "use_sim_time",
+        default_value="false",
+        description="Use simulation (Gazebo) clock if launch argument is 'True'",
+    )
     # Merging lidars
     merge_lidars = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -57,7 +62,11 @@ def generate_launch_description():
                     ]
                 )
             ]
-        )
+        ),
+        launch_arguments=[
+            ("use_sim_time", LaunchConfiguration("use_sim_time")),
+            ("publish_tf", "false")
+        ],
     )
 
 
@@ -158,6 +167,7 @@ def generate_launch_description():
         [
             run_mapping,
             map_file,
+            use_sim_time,
             robot_description,
             # Launch the hardware components
             lidars_launch,

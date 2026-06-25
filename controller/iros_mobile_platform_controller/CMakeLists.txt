@@ -50,4 +50,10 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME}
 )
 
+install(PROGRAMS 
+  scripts/encoders_to_odom.py
+  DESTINATION lib/${PROJECT_NAME}
+  RENAME encoders_to_odom
+)
+
 ament_package()

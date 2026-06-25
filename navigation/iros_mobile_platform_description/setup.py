@@ -28,8 +28,6 @@ setup(
     license="Apache-2.0",
     entry_points={
         "console_scripts": [
-            "odom_publisher = description.odom_publisher:main",
-            "cmd_to_odom = description.cmd_to_odom:main",
-	],
+        ],
     },
 )
