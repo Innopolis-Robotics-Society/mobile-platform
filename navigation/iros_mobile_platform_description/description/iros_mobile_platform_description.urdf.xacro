@@ -58,7 +58,7 @@
       <collision>
         <origin rpy="0 1.57075 0" xyz="0 0 0" />
         <geometry>
-          <cylinder radius="0.126" length="0.06" />
+          <cylinder radius="0.063" length="0.06" />
         </geometry>
       </collision>
 
@@ -141,7 +141,7 @@
       <collision>
         <origin rpy="0 1.57075 0" xyz="0 0 0" />
         <geometry>
-          <cylinder radius="0.126" length="0.06" />
+          <cylinder radius="0.063" length="0.06" />
         </geometry>
       </collision>
     </link>
@@ -170,7 +170,7 @@
 
       <collision>
         <geometry>
-          <sphere radius="0.126" />
+          <sphere radius="0.063" />
         </geometry>
       </collision>
     </link>
@@ -197,7 +197,7 @@
 
       <collision>
         <geometry>
-          <sphere radius="0.126" />
+          <sphere radius="0.063" />
         </geometry>
       </collision>
     </link>
@@ -246,7 +246,7 @@
 
       <collision>
         <geometry>
-          <sphere radius="0.126" />
+          <sphere radius="0.063" />
         </geometry>
       </collision>
 
@@ -326,7 +326,7 @@
 
         <!-- kinematics -->
         <wheel_separation>0.62</wheel_separation>
-        <wheel_diameter>0.252</wheel_diameter>
+        <wheel_diameter>0.126</wheel_diameter>
 
         <!-- limits -->
         <max_wheel_torque>20</max_wheel_torque>
