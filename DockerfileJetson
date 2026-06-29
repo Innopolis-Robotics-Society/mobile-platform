@@ -129,7 +129,10 @@ RUN apt-get update && apt-get upgrade -y && \
     ros-${ROS_DISTRO}-topic-tools \
     --fix-missing
 
-# Clean upros2 topic pub --once /voice/command std_msgs/msg/String 'data: "Maf"'
+# Pin setuptools: versions >=58.3 break colcon --symlink-install for setup.py packages
+RUN pip3 install setuptools==58.2.0
+
+# Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Initialize rosdep (run as user)
