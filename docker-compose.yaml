@@ -19,6 +19,7 @@ x-common: &common-setup
     - DISPLAY
     - QT_X11_NO_MITSHM=1
     - PULSE_SERVER=unix:/run/user/1000/pulse/native
+    - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
   working_dir: /home/fabian/ros2_ws
 
 services:
