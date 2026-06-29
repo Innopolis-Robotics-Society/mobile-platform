@@ -150,7 +150,7 @@ def generate_launch_description():
                     [
                         FindPackageShare("iros_mobile_platform_path_planner"),
                         "launch",
-                        "iros_mobile_platform_path_planner_nav2.launch.py",
+                        "path_planner_nav2.launch.py",
                     ]
                 )
             ]
