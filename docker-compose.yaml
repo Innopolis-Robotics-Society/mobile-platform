@@ -50,8 +50,8 @@ services:
       - "/dev/ttyACM0:/dev/ttyACM0"
       - "/dev/i2c-8:/dev/i2c-8"
       - "/dev/ttyTHS0:/dev/ttyTHS0"
-      - "/dev/usb_2.3:/dev/usb_2.3"
-      - "/dev/usb_2.4:/dev/usb_2.4"
+      - "/dev/lidar_front:/dev/lidar_front"
+      - "/dev/lidar_back:/dev/lidar_back"
     group_add:
       - "video"
       - "44"

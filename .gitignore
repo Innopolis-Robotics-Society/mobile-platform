@@ -81,3 +81,6 @@ Thumbs.db
 #Environment settings
 
 .idea/
+
+# Development folder
+dev/
