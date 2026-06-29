@@ -8,6 +8,9 @@ x-common: &common-setup
     - /dev/dri:/dev/dri:rw
     - /run/user/1000/pulse:/run/user/1000/pulse
     - /dev/v4l:/dev/v4l:ro
+    - ros2_build:/home/fabian/ros2_ws/build
+    - ros2_install:/home/fabian/ros2_ws/install
+    - ros2_log:/home/fabian/ros2_ws/log
   environment:
     - NVIDIA_VISIBLE_DEVICES=all
     - NVIDIA_DRIVER_CAPABILITIES=compute,utility,video,graphics,display
@@ -57,5 +60,11 @@ services:
       - "44"
     command: [
       "/bin/bash","-lc","
+      sudo chown -R fabian:fabian /home/fabian/ros2_ws/{build,install,log} || true &&
       exec bash"
       ]
+
+volumes:
+  ros2_build:
+  ros2_install:
+  ros2_log:
