@@ -71,20 +71,33 @@ def generate_launch_description():
 
 
 
-    slam_launch = IncludeLaunchDescription(
+    sensor_fusion_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [
                 PathJoinSubstitution(
                     [
-                        FindPackageShare("iros_mobile_platform_description"),
+                        FindPackageShare("iros_mobile_platform_sensor_fusion"),
                         "launch",
-                        "etogo_net_i_ne_budet.launch.py",
+                        "sensor_fusion.launch.py",
                     ]
                 )
             ]
         ),
-        launch_arguments=[],
+        launch_arguments=[
+            ("use_sim_time", LaunchConfiguration("use_sim_time")),
+        ],
     )
+    
+    encoders_to_odom_node = Node(
+        package="iros_mobile_platform_controller",
+        executable="encoders_to_odom",
+        name="encoders_to_odom",
+        output="screen",
+        parameters=[
+            {"publish_tf": LaunchConfiguration("publish_tf", default="false")}
+        ],
+    )
+
     socketcan = Node(
         package="ros2socketcan_bridge",
         executable="ros2socketcan",
@@ -178,8 +191,10 @@ def generate_launch_description():
             imu_node,
             # Launch the controller
             controller_launch,
+            # Launch the state estimation (odom + ekf)
+            encoders_to_odom_node,
+            sensor_fusion_launch,
             # Launch the path planner
-            #slam_launch,
             iros_mobile_platform_path_planner_launch,
             # Merge two laserscans together
             merge_lidars,
