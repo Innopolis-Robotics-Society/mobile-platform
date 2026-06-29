@@ -51,7 +51,7 @@ public:
         //timer = nh.createTimer(ros::Duration(0.005), &ImuPublisher::imuPublishCallback, this); // 200 Hz
 
         printf("Trying to open %s at %lu\r\n", port.c_str(), baudrate);
-        if ((fd = serial_open(const_cast<char*>(port.c_str()), baudrate) < 0))
+        if ((fd = serial_open(const_cast<char*>(port.c_str()), baudrate)) < 0)
 	    {
 	        printf("Error opening serial port ... exiting ....\r\n");
             //ROS_ERROR("Error opening serial port ... exiting ....");

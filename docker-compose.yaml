@@ -1,5 +1,7 @@
 x-common: &common-setup
   network_mode: host
+  ipc: host
+  pid: host
   privileged: true
   volumes:
     - ${HOME}/.Xauthority:/home/fabian/.Xauthority:rw
