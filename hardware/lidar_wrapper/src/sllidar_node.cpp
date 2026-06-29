@@ -294,6 +294,9 @@ class SLLidarNodeStable : public rclcpp::Node {
   bool config_and_start() {
     sl_result op_result;
     LidarScanMode current_scan_mode;
+
+    drv->setMotorSpeed();
+
     if (scan_mode.empty()) {
       op_result = drv->startScan(false /* not force scan */,
                                  true /* use typical scan mode */, 0,
@@ -506,10 +509,6 @@ class SLLidarNodeStable : public rclcpp::Node {
           if ((state == CONNECTED) || (state == CONNECTED_WARN)) {
             config_and_start();
           }
-        }
-        if ((state == CONNECTED) || (state == CONNECTED_WARN) || (state == CONNECTED_ERR)) {
-          state = checkSLLIDARHealth(drv);
-          if (state == LOST) {delete drv; drv = NULL;}
         }
 
       } else {  // drv exists, but not connected

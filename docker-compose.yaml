@@ -5,9 +5,8 @@ x-common: &common-setup
     - ${HOME}/.Xauthority:/home/fabian/.Xauthority:rw
     - .:/home/fabian/ros2_ws/src:rw
     - /tmp/.X11-unix:/tmp/.X11-unix:rw
-    - /dev/dri:/dev/dri:rw
     - /run/user/1000/pulse:/run/user/1000/pulse
-    - /dev/v4l:/dev/v4l:ro
+    - /dev:/dev
     - ros2_build:/home/fabian/ros2_ws/build
     - ros2_install:/home/fabian/ros2_ws/install
     - ros2_log:/home/fabian/ros2_ws/log
@@ -25,10 +24,7 @@ services:
     image: fabook/iros:v0.0.1
     stdin_open: true
     tty: true
-    devices:
-      - /dev/video0:/dev/video0
-      - /dev/video1:/dev/video1
-      - /dev/snd:/dev/snd
+
     group_add:
       - "video"
       - "44"
@@ -45,16 +41,7 @@ services:
       dockerfile: DockerfileJetson
     stdin_open: true
     tty: true
-    devices:
-      - /dev/video0:/dev/video0
-      - /dev/video1:/dev/video1
-      - /dev/snd:/dev/snd
 
-      - "/dev/ttyACM0:/dev/ttyACM0"
-      - "/dev/i2c-8:/dev/i2c-8"
-      - "/dev/ttyTHS0:/dev/ttyTHS0"
-      - "/dev/lidar_front:/dev/lidar_front"
-      - "/dev/lidar_back:/dev/lidar_back"
     group_add:
       - "video"
       - "44"
