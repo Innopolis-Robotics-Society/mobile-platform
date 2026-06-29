@@ -21,7 +21,7 @@ using namespace std::chrono_literals;
 #define HEARTBEAT_EXPIRE 2
 // TODO: check if 0x05 state is present at any time
 // (0x7F is "pre-operational", and 0x05 is "operating" state)
-#define HEARTBEAT_TARGET_STATE 0x7F
+#define HEARTBEAT_TARGET_STATE 0x05
 
 #define NODE_ID 1
 
@@ -47,7 +47,11 @@ class MotorsDriverNode : public rclcpp::Node {
         CAN_IN_TOPIC, 10,
         std::bind(&MotorsDriverNode::get_heartbeat, this, _1));
 
-    syncronous_velocity_control_init();
+    init_timer = this->create_wall_timer(
+        500ms, [this]() {
+          this->syncronous_velocity_control_init();
+          this->init_timer->cancel();
+        });
 
     last_beat = this->now();
     // timer_ = this->create_wall_timer(500ms,
@@ -122,7 +126,15 @@ class MotorsDriverNode : public rclcpp::Node {
   }
 
   void syncronous_velocity_control_init() {
-    RCLCPP_INFO(this->get_logger(), "OK\n");
+    RCLCPP_INFO(this->get_logger(), "Initializing Motor Controller (NMT + SDOs)...");
+
+    // Send NMT Start Remote Node
+    can_msgs::msg::Frame nmt_msg;
+    nmt_msg.id = 0x000;
+    nmt_msg.dlc = 2;
+    nmt_msg.data[0] = 0x01;
+    nmt_msg.data[1] = 0x00;
+    can_output->publish(nmt_msg);
 
     std::vector<std::array<uint8_t, 8UL>> commands =
         std::vector<std::array<uint8_t, 8UL>>({
@@ -178,6 +190,7 @@ class MotorsDriverNode : public rclcpp::Node {
   uint8_t last_heartbeat_state = 0x04;
 
   rclcpp::TimerBase::SharedPtr timer_;
+  rclcpp::TimerBase::SharedPtr init_timer;
 };
 
 int main(int argc, char *argv[]) {
