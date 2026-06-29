@@ -34,15 +34,6 @@ def generate_launch_description():
             use_sim_time,
             publish_tf,
             Node(
-                package="iros_mobile_platform_controller",
-                executable="encoders_to_odom",
-                name="encoders_to_odom",
-                output="screen",
-                parameters=[
-                    {"publish_tf": LaunchConfiguration("publish_tf")}
-                ],
-            ),
-            Node(
                 package="robot_state_publisher",
                 executable="robot_state_publisher",
                 name="robot_state_publisher",
