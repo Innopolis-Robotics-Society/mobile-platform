@@ -35,10 +35,7 @@ services:
     group_add:
       - "video"
       - "44"
-    command: [
-      "/bin/bash","-lc","
-      exec bash"
-      ]
+    command: [ "/bin/bash", "-lc", " exec bash" ]
 
   hw-terminal:
     <<: *common-setup
@@ -57,10 +54,7 @@ services:
     group_add:
       - "video"
       - "44"
-    command: [
-      "/bin/bash","-lc","
-      exec bash"
-      ]
+    command: [ "/bin/bash", "-lc", " sudo chmod 666 /dev/ttyTHS0 || true && exec bash" ]
 
 volumes:
   ros2_build:
