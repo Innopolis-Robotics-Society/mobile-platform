@@ -105,6 +105,7 @@ def generate_launch_description():
         executable="jy901s_imu_node",
         name="imu_node",
         output="screen",
+        parameters=[{"port": "/dev/ttyTHS0", "baudrate": 38400}],
     )
     # motor encoders
     encoders_node = Node(
@@ -137,7 +138,7 @@ def generate_launch_description():
                     [
                         FindPackageShare("iros_mobile_platform_path_planner"),
                         "launch",
-                        "iros_mobile_platform_path_planner_nav2.launch.py",
+                        "path_planner_nav2.launch.py",
                     ]
                 )
             ]
@@ -156,11 +157,28 @@ def generate_launch_description():
                     [
                         FindPackageShare("iros_mobile_platform_bringup"),
                         "launch",
-                        "simulator_control.launch.py",
+                        "hardware_control.launch.py",
                     ]
                 )
             ]
         )
+    )
+
+    sensor_fusion_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [
+                PathJoinSubstitution(
+                    [
+                        FindPackageShare("iros_mobile_platform_sensor_fusion"),
+                        "launch",
+                        "sensor_fusion.launch.py",
+                    ]
+                )
+            ]
+        ),
+        launch_arguments=[
+            ("use_sim_time", LaunchConfiguration("use_sim_time")),
+        ],
     )
 
     return LaunchDescription(
@@ -178,6 +196,8 @@ def generate_launch_description():
             imu_node,
             # Launch the controller
             controller_launch,
+            # Sensor fusion (EKF)
+            sensor_fusion_launch,
             # Launch the path planner
             #slam_launch,
             iros_mobile_platform_path_planner_launch,

@@ -3,20 +3,12 @@
 
   <xacro:macro name="iros_mobile_platform" params="prefix">
 
-    <link name="chassis1">
-      <visual>
-        <origin rpy="0 0 0" xyz="0 0 0" />
-        <!-- <geometry>
-        <mesh filename = "model://base.dae"/>
-      </geometry> -->
-      </visual>
+    <link name="base_link" />
 
-    </link>
-
-    <joint name="chassis1_2_chassis" type="fixed">
-      <parent link="chassis" />
-      <child link="chassis1" />
-      <origin rpy="0 0 1.57" xyz="0 0 0" />
+    <joint name="base_link_to_chassis" type="fixed">
+      <parent link="base_link" />
+      <child link="chassis" />
+      <origin rpy="0 0 -1.57079632679" xyz="0 0 0" />
     </joint>
 
     <link name="chassis">
@@ -95,7 +87,7 @@
     <joint name="chassis_to_lidar_front" type="fixed">
       <parent link="chassis" />
       <child link="lidar_front" />
-      <origin rpy="0 0 0" xyz="0.26 0.43 0.01" />
+      <origin rpy="0 0 1.57079632679" xyz="0.26 0.43 0.01" />
     </joint>
 
     <link name="lidar_back">
@@ -121,7 +113,7 @@
     <joint name="chassis_to_lidar_back" type="fixed">
       <parent link="chassis" />
       <child link="lidar_back" />
-      <origin rpy="0 0 0" xyz="-0.26 -0.42 0.01" />
+      <origin rpy="0 0 -1.57079632679" xyz="-0.26 -0.42 0.01" />
     </joint>
 
     <link name="right_wheel">
@@ -338,7 +330,7 @@
         <publish_wheel_tf>true</publish_wheel_tf>
 
         <odometry_frame>odom</odometry_frame>
-        <robot_base_frame>chassis</robot_base_frame>
+        <robot_base_frame>base_link</robot_base_frame>
       </plugin>
     </gazebo>
 
@@ -354,7 +346,7 @@
         <odom_publish_frequency>50</odom_publish_frequency>
         <odom_topic>/odom</odom_topic>
         <odom_frame>odom</odom_frame>
-        <robot_base_frame>chassis</robot_base_frame>
+        <robot_base_frame>base_link</robot_base_frame>
         <tf_topic>/odom/tf</tf_topic>
       </plugin>
 
