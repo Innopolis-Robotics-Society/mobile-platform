@@ -51,7 +51,8 @@ public:
         //timer = nh.createTimer(ros::Duration(0.005), &ImuPublisher::imuPublishCallback, this); // 200 Hz
 
         printf("Trying to open %s at %lu\r\n", port.c_str(), baudrate);
-        if ((fd = serial_open(const_cast<char*>(port.c_str()), baudrate) < 0))
+        fd = serial_open(const_cast<char*>(port.c_str()), baudrate);
+        if (fd < 0)
 	    {
 	        printf("Error opening serial port ... exiting ....\r\n");
             //ROS_ERROR("Error opening serial port ... exiting ....");
@@ -325,7 +326,7 @@ static void AutoScanSensor(char *dev)
 	int i, iRetry;
 	char cBuff[1];
 
-	for (i = 1; i < sizeof(c_uiBaud); i++)
+	for (i = 0; i < sizeof(c_uiBaud)/sizeof(c_uiBaud[0]); i++)
 	{
 		serial_close(fd);
         Delayms(1000);
@@ -353,4 +354,3 @@ static void AutoScanSensor(char *dev)
 	printf("can not find sensor\r\n");
 	printf("please check your connection\r\n");
 }
-
