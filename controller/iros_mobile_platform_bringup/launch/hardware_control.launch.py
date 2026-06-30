@@ -15,5 +15,6 @@ def generate_launch_description():
         [
             # Start log_collector node
             controller,
+
         ]
     )

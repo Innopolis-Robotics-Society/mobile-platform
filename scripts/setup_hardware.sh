@@ -5,6 +5,7 @@
 echo "SUBSYSTEM==\"tty\", ATTRS{idVendor}==\"10c4\", ATTRS{idProduct}==\"ea60\", ATTRS{serial}==\"0001\", MODE=\"0666\", SYMLINK+=\"lidar_front\"" > /etc/udev/rules.d/99-lidars.rules
 echo "SUBSYSTEM==\"tty\", ATTRS{idVendor}==\"10c4\", ATTRS{idProduct}==\"ea60\", ATTRS{serial}==\"LIDAR\", MODE=\"0666\", SYMLINK+=\"lidar_back\"" >> /etc/udev/rules.d/99-lidars.rules
 
+
 # setup battery sensor
 echo "KERNEL==\"i2c-8\",SUBSYSTEM==\"i2c-dev\",MODE:=\"0777\"" > /etc/udev/rules.d/99-bat.rules
 # setup IMU
