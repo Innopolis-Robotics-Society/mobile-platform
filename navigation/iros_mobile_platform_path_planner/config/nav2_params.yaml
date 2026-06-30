@@ -118,7 +118,7 @@ controller_server:
     # base_frame_id: "chassis1" #"base_link"
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5
-    min_theta_velocity_threshold: 0.001
+    min_theta_velocity_threshold: 0.15
     failure_tolerance: 0.3
     progress_checker_plugin: "progress_checker"
     goal_checker_plugins: ["general_goal_checker"] # "precise_goal_checker"
@@ -139,8 +139,8 @@ controller_server:
     general_goal_checker:
       stateful: True
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.1
-      yaw_goal_tolerance: 0.1
+      xy_goal_tolerance: 0.15
+      yaw_goal_tolerance: 0.25
     # DWB parameters
     FollowPath:
       plugin: "dwb_core::DWBLocalPlanner"
@@ -149,7 +149,7 @@ controller_server:
       min_vel_y: 0.0
       max_vel_x: 1.0
       max_vel_y: 0.0
-      max_vel_theta: 0.5
+      max_vel_theta: 1.0
       min_speed_xy: 0.0
       max_speed_xy: 0.2
       min_speed_theta: -3.0
