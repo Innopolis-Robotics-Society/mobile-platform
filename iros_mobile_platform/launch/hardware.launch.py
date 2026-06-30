@@ -29,8 +29,8 @@ def generate_launch_description():
     setup_ports = ExecuteProcess(
         cmd=['bash', '-c',
              'sudo chmod 666 /dev/ttyTHS0 2>/dev/null || true; '
-             'sudo chmod 666 /dev/lidar_front 2>/dev/null || true; '
-             'sudo chmod 666 /dev/lidar_back 2>/dev/null || true; '
+             'sudo chmod 666 /dev/usb_* 2>/dev/null || true; '
+             'sudo chmod 666 /dev/lidar* 2>/dev/null || true; '
              'echo "[hardware.launch] Ports configured"'],
         name='setup_ports',
         output='screen',
