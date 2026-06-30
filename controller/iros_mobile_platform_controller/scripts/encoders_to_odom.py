@@ -7,7 +7,7 @@ encoders_to_odom — конвертирует скорости энкодеро�
                 TF: odom -> base_link  (только если publish_tf=True)
 
 Параметры ROS:
-  wheel_radius  (float, default=0.126)   — радиус колеса, метры
+  wheel_radius  (float, default=0.065)   — радиус колеса, метры
   robot_base    (float, default=0.62)    — расстояние между колёсами, метры
   publish_tf    (bool,  default=False)   — публиковать TF odom->base_link
                                            (False если запущен EKF — он сам публикует)
@@ -41,7 +41,7 @@ class EncodersToOdom(Node):
         super().__init__('encoders_to_odom')
 
         # ── Параметры ──────────────────────────────────────────────────────
-        self.declare_parameter('wheel_radius', 0.126)
+        self.declare_parameter('wheel_radius', 0.065)
         self.declare_parameter('robot_base',   0.62)
         self.declare_parameter('publish_tf',   False)
         self.declare_parameter('odom_frame',   'odom')
