@@ -52,9 +52,11 @@ class EncodersNode : public rclcpp::Node {
       return;
     }
 
-    positions[msg.data[3] - 1] =
-        static_cast<int32_t>(msg.data[4] + (msg.data[5] << 8) +
-                             (msg.data[6] << 16) + (msg.data[7] << 24));
+    if (msg.data[3] == 1 || msg.data[3] == 2) {
+      positions[msg.data[3] - 1] =
+          static_cast<int32_t>(msg.data[4] + (msg.data[5] << 8) +
+                               (msg.data[6] << 16) + (msg.data[7] << 24));
+    }
 
     iros_mobile_platform_msgs::msg::WheelsData angles;
     angles.left = positions[0] / 4096. / 4;

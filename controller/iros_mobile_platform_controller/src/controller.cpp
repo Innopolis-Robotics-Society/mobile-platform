@@ -66,13 +66,8 @@ class DiffDriveController : public rclcpp::Node {
   void cmdVelCallback(const geometry_msgs::msg::Twist::SharedPtr msg) {
     velocityHandler(msg);
     // Extract linear and angular velocities from the message
-    double lin_vx = msg->linear.x;
-    double lin_vy = msg->linear.y;
-    double linear_velocity = std::sqrt(lin_vx * lin_vx + lin_vy * lin_vy);
+    double linear_velocity = msg->linear.x;
 
-    if (lin_vx < 0 || lin_vy < 0) {
-      linear_velocity = -linear_velocity;
-    }
     double angular_velocity = msg->angular.z;
 
     // Compute the wheel velocities
@@ -94,9 +89,8 @@ class DiffDriveController : public rclcpp::Node {
                 std::to_string(wheels_msg.left).c_str());
     RCLCPP_INFO(this->get_logger(), "Publishing wheels_msg.right: '%s'",
                 std::to_string(wheels_msg.right).c_str());
-    RCLCPP_INFO(this->get_logger(), "Robot base '%d'",
-                this->get_parameter("robot_base_", robot_base_));
-    std::cout << robot_base_ << std::endl;
+    RCLCPP_INFO(this->get_logger(), "Robot base '%f'", robot_base_);
+
 
     wheels_pub_->publish(wheels_msg);
   }

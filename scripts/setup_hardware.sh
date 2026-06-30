@@ -17,7 +17,6 @@ udevadm trigger
 sed -i '/nvpmodel/d' /etc/crontab
 echo "@reboot root /usr/sbin/nvpmodel -m 8 && /usr/bin/jetson_clocks" >> /etc/crontab
 
-
 read -p "Reboot [y/N]? " -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then

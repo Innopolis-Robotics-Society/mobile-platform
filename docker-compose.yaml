@@ -6,9 +6,9 @@ x-common: &common-setup
   volumes:
     - ${HOME}/.Xauthority:/home/fabian/.Xauthority:rw
     - .:/home/fabian/ros2_ws/src:rw
-    - ros2_build:/home/fabian/ros2_ws/build
-    - ros2_install:/home/fabian/ros2_ws/install
-    - ros2_log:/home/fabian/ros2_ws/log
+    - ./build:/home/fabian/ros2_ws/build
+    - ./install:/home/fabian/ros2_ws/install
+    - ./log:/home/fabian/ros2_ws/log
     - /tmp/.X11-unix:/tmp/.X11-unix:rw
     - /run/user/1000/pulse:/run/user/1000/pulse
     - /dev:/dev
@@ -52,7 +52,3 @@ services:
       exec bash"
       ]
 
-volumes:
-  ros2_build:
-  ros2_install:
-  ros2_log:
