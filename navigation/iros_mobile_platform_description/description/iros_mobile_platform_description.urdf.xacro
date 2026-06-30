@@ -220,11 +220,7 @@
 
       <collision>
         <geometry>
-<<<<<<< HEAD
-          <sphere radius="0.130" />
-=======
           <sphere radius="0.065" />
->>>>>>> dev_real
         </geometry>
       </collision>
     </link>
