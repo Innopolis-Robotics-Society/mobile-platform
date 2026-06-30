@@ -20,7 +20,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 # Update and install necessary packages
 RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y sudo curl gnupg2 lsb-release net-tools python3-pip \
+    && apt-get install -y sudo curl gnupg2 lsb-release net-tools iproute2 python3-pip \
     && curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add - \
     && echo "deb http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list
 
@@ -127,6 +127,7 @@ RUN apt-get update && apt-get upgrade -y && \
     ros-${ROS_DISTRO}-controller-manager \
     ros-${ROS_DISTRO}-ros2-controllers \
     ros-${ROS_DISTRO}-topic-tools \
+    ros-${ROS_DISTRO}-can-msgs \
     --fix-missing
 
 # Pin setuptools: versions >=58.3 break colcon --symlink-install for setup.py packages
