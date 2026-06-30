@@ -13,15 +13,6 @@ echo "KERNEL==\"ttyTHS0\",SUBSYSTEM==\"tty\",MODE:=\"0777\"" > /etc/udev/rules.d
 udevadm control --reload-rules
 udevadm trigger
 
-# setup CAN interface (will go up next reboot)
-cp "$(dirname "$0")/setup_can.sh" /usr/sbin/overlord_setup_can.sh
-sed -i '/setup_can.sh/d' /etc/crontab
-echo "@reboot root /usr/sbin/overlord_setup_can.sh" >> /etc/crontab
-
-# Setup permissions for IMU UART
-echo "Setting permissions for /dev/ttyTHS0..."
-sudo chmod 777 /dev/ttyTHS0 || echo "Warning: /dev/ttyTHS0 not found"
-
 # disable dynamic cpu freq management (will go up next reboot)
 sed -i '/nvpmodel/d' /etc/crontab
 echo "@reboot root /usr/sbin/nvpmodel -m 8 && /usr/bin/jetson_clocks" >> /etc/crontab
