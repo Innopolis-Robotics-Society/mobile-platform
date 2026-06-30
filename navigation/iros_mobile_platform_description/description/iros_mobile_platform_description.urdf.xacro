@@ -13,7 +13,7 @@
 
     <link name="chassis">
       <visual>
-        <origin rpy="0 0 0" xyz="0 0 -0.20" />
+        <origin rpy="0 0 3.14159265359" xyz="0 0 -0.20" />
         <geometry>
           <mesh filename="model://base.dae" />
         </geometry>
@@ -23,15 +23,19 @@
         <mass value="60.5" />
         <inertia ixx="0.45375" ixy="0.0" ixz="0.0" iyy="2.263304" iyz="0.0" izz="2.716954" />
       </inertial>
-
       <collision>
         <geometry>
           <box size="0.67 0.93  0.2" />
         </geometry>
       </collision>
-
-
     </link>
+
+    <link name="imu_link" />
+    <joint name="chassis_to_imu" type="fixed">
+      <parent link="chassis" />
+      <child link="imu_link" />
+      <origin rpy="0 0 0" xyz="0 0 0" />
+    </joint>
 
     <link name="left_wheel">
 
@@ -87,7 +91,7 @@
     <joint name="chassis_to_lidar_front" type="fixed">
       <parent link="chassis" />
       <child link="lidar_front" />
-      <origin rpy="0 0 1.57079632679" xyz="0.26 0.43 0.01" />
+      <origin rpy="0 0 3.14159265359" xyz="0.26 0.43 0.01" />
     </joint>
 
     <link name="lidar_back">
@@ -113,7 +117,7 @@
     <joint name="chassis_to_lidar_back" type="fixed">
       <parent link="chassis" />
       <child link="lidar_back" />
-      <origin rpy="0 0 -1.57079632679" xyz="-0.26 -0.42 0.01" />
+      <origin rpy="0 0 0" xyz="-0.26 -0.42 0.01" />
     </joint>
 
     <link name="right_wheel">
