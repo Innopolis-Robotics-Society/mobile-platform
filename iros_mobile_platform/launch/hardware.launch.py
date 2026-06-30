@@ -201,25 +201,7 @@ def generate_launch_description():
         output="screen",
     )
 
-    # ── Path Planner (Nav2) ───────────────────────────────────────────────
-    iros_mobile_platform_path_planner_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            [
-                PathJoinSubstitution(
-                    [
-                        FindPackageShare("iros_mobile_platform_path_planner"),
-                        "launch",
-                        "path_planner_nav2.launch.py",
-                    ]
-                )
-            ]
-        ),
-        launch_arguments=[
-            ("use_sim_time", "false"),
-            ("slam", LaunchConfiguration("run_mapping")),
-            ("map_file", LaunchConfiguration("map_file")),
-        ],
-    )
+
 
     # ── Delayed CAN-dependent nodes (wait 3s for CAN bus to come up) ─────
     delayed_can_nodes = TimerAction(
@@ -254,11 +236,9 @@ def generate_launch_description():
             # 7. State estimation (odometry + EKF)
             encoders_to_odom_node,
             sensor_fusion_launch,
-            # 8. Navigation
-            iros_mobile_platform_path_planner_launch,
-            # 9. Lidar merge
+            # 8. Lidar merge
             merge_lidars,
-            # 10. RViz
+            # 9. RViz
             rviz_node,
         ]
     )
