@@ -49,7 +49,7 @@ class MotorsDriverNode : public rclcpp::Node {
         std::bind(&MotorsDriverNode::get_heartbeat, this, _1));
 
     init_timer = this->create_wall_timer(
-        500ms, [this]() {
+        3000ms, [this]() {
           this->syncronous_velocity_control_init();
           this->init_timer->cancel();
         });

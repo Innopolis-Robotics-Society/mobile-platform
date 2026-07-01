@@ -533,7 +533,7 @@ class SLLidarNodeStable : public rclcpp::Node {
       if (need_status_update) {
         need_status_update = false;
         manage_state();
-        RCLCPP_INFO(this->get_logger(), "State: %d", state);
+        RCLCPP_DEBUG(this->get_logger(), "State: %d", state);
         publish_status();
       }
 
