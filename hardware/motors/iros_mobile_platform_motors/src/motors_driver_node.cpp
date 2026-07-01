@@ -1,5 +1,6 @@
 #include <chrono>
 #include <memory>
+#include <thread>
 
 #include "rclcpp/rclcpp.hpp"
 // #include "std_msgs/msg/string.hpp"
@@ -135,6 +136,7 @@ class MotorsDriverNode : public rclcpp::Node {
     nmt_msg.data[0] = 0x01;
     nmt_msg.data[1] = 0x00;
     can_output->publish(nmt_msg);
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
     std::vector<std::array<uint8_t, 8UL>> commands =
         std::vector<std::array<uint8_t, 8UL>>({
@@ -163,6 +165,7 @@ class MotorsDriverNode : public rclcpp::Node {
       msg.data = command;
 
       can_output->publish(msg);
+      std::this_thread::sleep_for(std::chrono::milliseconds(20));
     }
   }
 
