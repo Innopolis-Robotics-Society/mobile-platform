@@ -23,7 +23,7 @@ iros_mobile_platform_controller:
     pose_covariance_diagonal : [0.001, 0.001, 1.0e-3, 1.0e-3, 1.0e-3, 0.01]
     twist_covariance_diagonal: [0.001, 0.001, 1.0e-3, 1.0e-3, 1.0e-3, 0.01]
 
-    wheel_separation : 0.62
+    wheel_separation : 0.637
     wheel_radius : 0.065
 
     wheel_separation_multiplier: 1.0

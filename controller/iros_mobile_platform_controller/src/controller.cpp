@@ -18,7 +18,7 @@ class DiffDriveController : public rclcpp::Node {
   DiffDriveController() : Node("diff_drive_controller") {
     // Parameters for the differential drive robot
     this->declare_parameter<double>("robot_base_",
-                                    0.62);  // Distance between the wheels (measured)
+                                    0.637);  // Distance between the wheels (measured)
     this->declare_parameter<double>("wheel_radius_",
                                     0.065);  // Radius of the wheels (measured)
     this->declare_parameter<std::string>("measurement_units_", "rpm");
