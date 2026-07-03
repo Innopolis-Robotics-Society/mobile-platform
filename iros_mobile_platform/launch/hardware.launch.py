@@ -2,6 +2,7 @@ from launch import LaunchDescription
 from launch.actions import ExecuteProcess, TimerAction
 from launch_ros.actions import Node
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
 from launch_ros.substitutions import FindPackageShare
@@ -22,6 +23,11 @@ def generate_launch_description():
         "use_sim_time",
         default_value="false",
         description="Use simulation (Gazebo) clock if launch argument is 'True'",
+    )
+    run_rviz = DeclareLaunchArgument(
+        "run_rviz",
+        default_value="false",
+        description="Launch RViz2 GUI (set to True for SSH X11 debugging)",
     )
 
     # ── Hardware Setup: Ports & CAN ───────────────────────────────────────
@@ -77,6 +83,7 @@ def generate_launch_description():
         name="rviz2",
         output="log",
         arguments=["-d", rviz_config_file],
+        condition=IfCondition(LaunchConfiguration("run_rviz")),
     )
 
     # ── Robot Description (URDF + robot_state_publisher) ──────────────────
@@ -250,6 +257,7 @@ def generate_launch_description():
             run_mapping,
             map_file,
             use_sim_time,
+            run_rviz,
             # 2. Hardware setup (ports & CAN)
             setup_ports,
             setup_can,

@@ -127,11 +127,14 @@ RUN apt-get update && apt-get upgrade -y && \
     ros-${ROS_DISTRO}-controller-manager \
     ros-${ROS_DISTRO}-ros2-controllers \
     ros-${ROS_DISTRO}-topic-tools \
+    ros-${ROS_DISTRO}-rmw-cyclonedds-cpp \
     ros-${ROS_DISTRO}-can-msgs \
+    ros-${ROS_DISTRO}-rosbridge-suite \
+    python3-flask \
     --fix-missing
 
 # Pin setuptools: versions >=58.3 break colcon --symlink-install for setup.py packages
-RUN pip3 install setuptools==58.2.0
+RUN pip3 install setuptools==58.2.0 waitress
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -146,6 +149,12 @@ RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/$USERNAME/.bashrc
 USER $USERNAME
 
 RUN mkdir -p /home/$USERNAME/ros2_ws/src
+
+# Build Vizanti web GUI (copied from submodule extras/vizanti)
+COPY --chown=$USERNAME:$USERNAME extras/vizanti /home/$USERNAME/ros2_ws/src/vizanti
+RUN bash -c "source /opt/ros/${ROS_DISTRO}/setup.bash && \
+    cd /home/$USERNAME/ros2_ws && \
+    colcon build --packages-select vizanti_msgs vizanti_cpp vizanti_server vizanti --symlink-install"
 
 CMD ["bash"]
 #docker build -t image_name -f Dockerfile .

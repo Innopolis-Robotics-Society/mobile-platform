@@ -4,3 +4,7 @@
 [submodule "hardware/motors/socketcan"]
 	path = hardware/motors/socketcan
 	url = https://github.com/GOFIRST-Robotics/ros2socketcan_bridge
+[submodule "extras/vizanti"]
+	path = extras/vizanti
+	url = https://github.com/MoffKalast/vizanti.git
+	branch = ros2

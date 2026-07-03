@@ -39,6 +39,11 @@ cd ~/ws/src/mobile-platform || { echo "Ошибка: папка ~/ws/src/mobile-
 docker compose run --rm hw-terminal bash -c "
     sudo chown -R fabian:fabian /home/fabian/ros2_ws/{build,install,log} || true
     source install/setup.bash
+
+    # Запускаем Vizanti Web GUI (Flask :5000 + rosbridge :5001)
+    # Доступ из браузера: http://<JETSON_IP>:5000
+    ros2 launch vizanti_server vizanti_server.launch.py &
+
     ros2 launch iros_mobile_platform hardware.launch.py \
         run_mapping:=${RUN_MAPPING} \
         map_file:=${MAP_FILE} \
