@@ -150,11 +150,5 @@ USER $USERNAME
 
 RUN mkdir -p /home/$USERNAME/ros2_ws/src
 
-# Build Vizanti web GUI (copied from submodule extras/vizanti)
-COPY --chown=$USERNAME:$USERNAME extras/vizanti /home/$USERNAME/ros2_ws/src/vizanti
-RUN bash -c "source /opt/ros/${ROS_DISTRO}/setup.bash && \
-    cd /home/$USERNAME/ros2_ws && \
-    colcon build --packages-select vizanti_msgs vizanti_cpp vizanti_server vizanti --symlink-install"
-
 CMD ["bash"]
 #docker build -t image_name -f Dockerfile .
