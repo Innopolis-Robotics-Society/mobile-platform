@@ -109,6 +109,7 @@ RUN apt-get update && apt-get upgrade -y && \
     ros-${ROS_DISTRO}-nav2-rviz-plugins \
     ros-${ROS_DISTRO}-robot-localization \
     ros-${ROS_DISTRO}-pointcloud-to-laserscan \
+    ros-${ROS_DISTRO}-laser-filters \
     --fix-missing
 
 # ROS pkgs
@@ -141,7 +142,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Initialize rosdep (run as user)
 RUN sudo rosdep init || true \
-    && rosdep update
+    && rosdep update || true
 
 # Add source in .bashrc
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/$USERNAME/.bashrc

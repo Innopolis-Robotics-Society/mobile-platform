@@ -30,6 +30,14 @@ def generate_launch_description():
             "params.yaml",
         ]
     )
+
+    laser_filter_config = PathJoinSubstitution(
+        [
+            FindPackageShare("ros2_laser_scan_merger"),
+            "config",
+            "laser_filter_params.yaml",
+        ]
+    )
     return LaunchDescription(
         [
             use_sim_time,
@@ -47,6 +55,18 @@ def generate_launch_description():
                 package="pointcloud_to_laserscan",
                 executable="pointcloud_to_laserscan_node",
                 parameters=[config, {"use_sim_time": LaunchConfiguration("use_sim_time")}],
+                remappings=[("scan", "scan_raw")],
+            ),
+
+	    launch_ros.actions.Node(
+                package="laser_filters",
+                executable="scan_to_scan_filter_chain",
+                parameters=[laser_filter_config, {"use_sim_time": LaunchConfiguration("use_sim_time")}],
+                remappings=[
+                    ("scan", "scan_raw"),
+                    ("scan_filtered", "scan"),
+                ],
+                output="screen",
             ),
         ]
     )
