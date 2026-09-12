@@ -79,7 +79,7 @@ class ADS1115 : public rclcpp::Node {
     } else {
       float raw_data = (float)((buf[0] << 8) | buf[1]);
       voltage = raw_data * GAIN;
-      RCLCPP_INFO(this->get_logger(), "%f %f", raw_data, voltage);
+      RCLCPP_DEBUG(this->get_logger(), "%f %f", raw_data, voltage);
     }
 
     close(file);

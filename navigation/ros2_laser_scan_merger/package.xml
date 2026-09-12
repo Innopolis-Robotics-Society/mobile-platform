@@ -11,6 +11,7 @@
 
   <depend>rclcpp</depend>
   <depend>std_msgs</depend>
+  <exec_depend>laser_filters</exec_depend>
 
   <depend>pcl_conversions</depend>
   <depend>rcl_interfaces</depend>

@@ -15,6 +15,12 @@ def generate_launch_description():
         description="Use simulation (Gazebo) clock if launch argument is 'True'",
     )
 
+    publish_tf = DeclareLaunchArgument(
+        "publish_tf",
+        default_value="false",
+        description="Publish odom->base_link TF from odometry node",
+    )
+
     des_file = os.path.join(
         get_package_share_directory("iros_mobile_platform_description"),
         "description",
@@ -26,15 +32,7 @@ def generate_launch_description():
     return LaunchDescription(
         [
             use_sim_time,
-            Node(
-                package="iros_mobile_platform_description",
-                executable="cmd_to_odom",
-                name="cmd_to_odom",
-                output="screen",
-                parameters=[
-                    {}
-                ],
-            ),
+            publish_tf,
             Node(
                 package="robot_state_publisher",
                 executable="robot_state_publisher",

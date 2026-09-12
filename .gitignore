@@ -77,3 +77,10 @@ compile_commands.json
 # =========================
 .DS_Store
 Thumbs.db
+
+#Environment settings
+
+.idea/
+
+# Development folder
+dev/

@@ -11,14 +11,10 @@ def generate_launch_description():
         output="screen",
     )
 
-    rqt_controller = Node(
-        package="rqt_robot_steering",
-        executable="rqt_robot_steering",
-    )
     return LaunchDescription(
         [
             # Start log_collector node
             controller,
-            rqt_controller,
+
         ]
     )

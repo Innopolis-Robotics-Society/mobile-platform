@@ -26,7 +26,7 @@ static volatile char s_cDataUpdate = 0;
 //const int c_uiBaud[] = {2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600};
 const int c_uiBaud[] = {38400};
 
-static void AutoScanSensor(char *dev);
+static void AutoScanSensor(char *dev, int target_baud);
 static void SensorDataUpdata(uint32_t uiReg, uint32_t uiRegNum);
 static void Delayms(uint16_t ucMs);
 
@@ -45,13 +45,14 @@ public:
         this->baudrate = this->get_parameter("baudrate").as_int();
         this->reverse_pitch_roll = this->get_parameter("reverse_pitch_roll").as_bool();
 
-        imu_pub = this->create_publisher<sensor_msgs::msg::Imu>("imu/data_raw", 1000);
-        mag_pub = this->create_publisher<sensor_msgs::msg::MagneticField>("imu/mag", 1000);
-        gps_pub = this->create_publisher<sensor_msgs::msg::NavSatFix>("gps/fix", 1000);
+        imu_pub = this->create_publisher<sensor_msgs::msg::Imu>("imu/data", 10);
+        mag_pub = this->create_publisher<sensor_msgs::msg::MagneticField>("imu/mag", 10);
+        gps_pub = this->create_publisher<sensor_msgs::msg::NavSatFix>("gps/fix", 10);
         //timer = nh.createTimer(ros::Duration(0.005), &ImuPublisher::imuPublishCallback, this); // 200 Hz
 
         printf("Trying to open %s at %lu\r\n", port.c_str(), baudrate);
-        if ((fd = serial_open(const_cast<char*>(port.c_str()), baudrate) < 0))
+        fd = serial_open(const_cast<char*>(port.c_str()), baudrate);
+        if (fd < 0)
 	    {
 	        printf("Error opening serial port ... exiting ....\r\n");
             //ROS_ERROR("Error opening serial port ... exiting ....");
@@ -66,7 +67,7 @@ public:
 	    WitRegisterCallBack(SensorDataUpdata);
 
         //ROS_INFO("Starting to publish imu data ...");
-	    AutoScanSensor(const_cast<char*>(port.c_str()));
+	    AutoScanSensor(const_cast<char*>(port.c_str()), baudrate);
 
         pubThread = std::thread(&ImuPublisher::imuPublish, this);
     }
@@ -123,7 +124,7 @@ public:
                 if ((s_cDataUpdate & ACC_UPDATE) && (s_cDataUpdate & GYRO_UPDATE) && (s_cDataUpdate & ANGLE_UPDATE))
                 {
                     auto imu_msg = sensor_msgs::msg::Imu();
-                    imu_msg.header.stamp = rclcpp::Clock{RCL_ROS_TIME}.now(); // careful with it
+                    imu_msg.header.stamp = this->now();
                     imu_msg.header.frame_id = "imu_link";
 
                     imu_msg.linear_acceleration.x = fAcc[0];
@@ -186,7 +187,7 @@ public:
                 if (s_cDataUpdate & MAG_UPDATE)
                 {
                     auto mag_msg = sensor_msgs::msg::MagneticField();
-                    mag_msg.header.stamp = rclcpp::Clock{RCL_ROS_TIME}.now();
+                    mag_msg.header.stamp = this->now();
                     mag_msg.header.frame_id = "imu_link";
 
                     mag_msg.magnetic_field.x = sReg[HX];
@@ -213,7 +214,7 @@ public:
                 if (s_cDataUpdate & GPS_UPDATE)
                 {
                     auto gps_msg = sensor_msgs::msg::NavSatFix();
-                    gps_msg.header.stamp = rclcpp::Clock{RCL_ROS_TIME}.now();
+                    gps_msg.header.stamp = this->now();
                     gps_msg.header.frame_id = "navsat_link";
 
 
@@ -320,37 +321,34 @@ static void Delayms(uint16_t ucMs)
 	usleep(ucMs * 1000);
 }
 
-static void AutoScanSensor(char *dev)
+static void AutoScanSensor(char *dev, int target_baud)
 {
-	int i, iRetry;
+	int iRetry;
 	char cBuff[1];
 
-	for (i = 1; i < sizeof(c_uiBaud); i++)
+	serial_close(fd);
+	Delayms(1000);
+	s_iCurBaud = target_baud;
+	fd = serial_open(dev, target_baud);
+
+	iRetry = 2;
+	do
 	{
-		serial_close(fd);
-        Delayms(1000);
-		s_iCurBaud = c_uiBaud[i];
-		fd = serial_open(dev, c_uiBaud[i]);
-
-		iRetry = 2;
-		do
+		s_cDataUpdate = 0;
+		WitReadReg(AX, 3);
+		Delayms(1000);
+		while (serial_read_data(fd, reinterpret_cast<unsigned char*>(cBuff), 1))
 		{
-			s_cDataUpdate = 0;
-			WitReadReg(AX, 3);
-			Delayms(1000);
-			while (serial_read_data(fd, reinterpret_cast<unsigned char*>(cBuff), 1))
-			{
-				WitSerialDataIn(cBuff[0]);
-			}
-			if (s_cDataUpdate != 0)
-			{
-				printf("%d baud find sensor\r\n\r\n", c_uiBaud[i]);
-				return;
-			}
-			iRetry--;
-		} while (iRetry);
-	}
-	printf("can not find sensor\r\n");
-	printf("please check your connection\r\n");
-}
+			WitSerialDataIn(cBuff[0]);
+		}
+		if (s_cDataUpdate != 0)
+		{
+			printf("%d baud find sensor\r\n\r\n", target_baud);
+			return;
+		}
+		iRetry--;
+	} while (iRetry);
 
+	printf("can not find sensor at %d baud\r\n", target_baud);
+	printf("please check your connection or configuration\r\n");
+}

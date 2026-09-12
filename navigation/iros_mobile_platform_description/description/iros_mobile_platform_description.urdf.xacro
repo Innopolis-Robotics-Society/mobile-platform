@@ -3,25 +3,17 @@
 
   <xacro:macro name="iros_mobile_platform" params="prefix">
 
-    <link name="chassis1">
-      <visual>
-        <origin rpy="0 0 0" xyz="0 0 0" />
-        <!-- <geometry>
-        <mesh filename = "model://base.dae"/>
-      </geometry> -->
-      </visual>
+    <link name="base_link" />
 
-    </link>
-
-    <joint name="chassis1_2_chassis" type="fixed">
-      <parent link="chassis" />
-      <child link="chassis1" />
-      <origin rpy="0 0 1.57" xyz="0 0 0" />
+    <joint name="base_link_to_chassis" type="fixed">
+      <parent link="base_link" />
+      <child link="chassis" />
+      <origin rpy="0 0 -1.57079632679" xyz="0.045 0 0" />
     </joint>
 
     <link name="chassis">
       <visual>
-        <origin rpy="0 0 0" xyz="0 0 -0.20" />
+        <origin rpy="0 0 3.14159265359" xyz="0 0 -0.20" />
         <geometry>
           <mesh filename="model://base.dae" />
         </geometry>
@@ -31,15 +23,19 @@
         <mass value="60.5" />
         <inertia ixx="0.45375" ixy="0.0" ixz="0.0" iyy="2.263304" iyz="0.0" izz="2.716954" />
       </inertial>
-
       <collision>
         <geometry>
           <box size="0.67 0.93  0.2" />
         </geometry>
       </collision>
-
-
     </link>
+
+    <link name="imu_link" />
+    <joint name="chassis_to_imu" type="fixed">
+      <parent link="chassis" />
+      <child link="imu_link" />
+      <origin rpy="0 0 0" xyz="0 0 0" />
+    </joint>
 
     <link name="left_wheel">
 
@@ -58,7 +54,7 @@
       <collision>
         <origin rpy="0 1.57075 0" xyz="0 0 0" />
         <geometry>
-          <cylinder radius="0.07" length="0.06" />
+          <cylinder radius="0.065" length="0.06" />
         </geometry>
       </collision>
 
@@ -69,7 +65,7 @@
       <limit effort="1000.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="100.0" />
       <parent link="chassis" />
       <child link="left_wheel" />
-      <origin rpy="0 0 3.14" xyz="-0.33 -0.045 -0.15" />
+      <origin rpy="0 0 3.14" xyz="-0.3185 -0.045 -0.15" />
     </joint>
 
     <link name="lidar_front">
@@ -95,7 +91,7 @@
     <joint name="chassis_to_lidar_front" type="fixed">
       <parent link="chassis" />
       <child link="lidar_front" />
-      <origin rpy="0 0 0" xyz="0.26 0.43 0.01" />
+      <origin rpy="0 0 3.14159265359" xyz="0.26 0.43 0.01" />
     </joint>
 
     <link name="lidar_back">
@@ -141,7 +137,7 @@
       <collision>
         <origin rpy="0 1.57075 0" xyz="0 0 0" />
         <geometry>
-          <cylinder radius="0.07" length="0.06" />
+          <cylinder radius="0.065" length="0.06" />
         </geometry>
       </collision>
     </link>
@@ -151,7 +147,7 @@
       <limit effort="1000.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="100.0" />
       <parent link="chassis" />
       <child link="right_wheel" />
-      <origin rpy="0 0 3.14" xyz="0.33 -0.045 -0.15" />
+      <origin rpy="0 0 3.14" xyz="0.3185 -0.045 -0.15" />
     </joint>
 
     <link name="front_left_dummy_wheel">
@@ -170,7 +166,7 @@
 
       <collision>
         <geometry>
-          <sphere radius="0.07" />
+          <sphere radius="0.065" />
         </geometry>
       </collision>
     </link>
@@ -197,7 +193,7 @@
 
       <collision>
         <geometry>
-          <sphere radius="0.07" />
+          <sphere radius="0.065" />
         </geometry>
       </collision>
     </link>
@@ -224,7 +220,7 @@
 
       <collision>
         <geometry>
-          <sphere radius="0.07" />
+          <sphere radius="0.065" />
         </geometry>
       </collision>
     </link>
@@ -246,7 +242,7 @@
 
       <collision>
         <geometry>
-          <sphere radius="0.07" />
+          <sphere radius="0.065" />
         </geometry>
       </collision>
 
@@ -325,8 +321,8 @@
         <right_joint>chassis_to_right_wheel</right_joint>
 
         <!-- kinematics -->
-        <wheel_separation>0.34</wheel_separation>
-        <wheel_diameter>0.14</wheel_diameter>
+        <wheel_separation>0.637</wheel_separation>
+        <wheel_diameter>0.130</wheel_diameter>
 
         <!-- limits -->
         <max_wheel_torque>20</max_wheel_torque>
@@ -338,7 +334,7 @@
         <publish_wheel_tf>true</publish_wheel_tf>
 
         <odometry_frame>odom</odometry_frame>
-        <robot_base_frame>chassis</robot_base_frame>
+        <robot_base_frame>base_link</robot_base_frame>
       </plugin>
     </gazebo>
 
@@ -354,7 +350,7 @@
         <odom_publish_frequency>50</odom_publish_frequency>
         <odom_topic>/odom</odom_topic>
         <odom_frame>odom</odom_frame>
-        <robot_base_frame>chassis</robot_base_frame>
+        <robot_base_frame>base_link</robot_base_frame>
         <tf_topic>/odom/tf</tf_topic>
       </plugin>
 
